@@ -3,9 +3,9 @@ import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { routing } from "./i18n/config";
 import {
+  aliasRouteForHost,
   localizedPath,
   preferredLocale,
-  QR_ALIAS_HOST,
   SITE_URL,
 } from "./lib/site";
 
@@ -18,9 +18,10 @@ function requestHostname(request: NextRequest) {
 }
 
 export default function proxy(request: NextRequest) {
-  if (requestHostname(request) === QR_ALIAS_HOST) {
+  const aliasRoute = aliasRouteForHost(requestHostname(request));
+  if (aliasRoute) {
     const locale = preferredLocale(request.headers.get("accept-language"));
-    const target = new URL(localizedPath(locale, "qr"), SITE_URL);
+    const target = new URL(localizedPath(locale, aliasRoute), SITE_URL);
     target.search = request.nextUrl.search;
 
     const response = NextResponse.redirect(target, 307);

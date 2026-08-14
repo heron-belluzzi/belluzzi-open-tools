@@ -136,5 +136,59 @@
     "security_open": "No password",
     "security_wpa": "WPA / WPA2",
     "security_wep": "WEP"
+  },
+  "pass": {
+    "meta_title": "Secure password and passphrase generator",
+    "meta_description": "Generate strong passwords and passphrases in your browser with Web Crypto. Free, open source and without sending or storing your data.",
+    "eyebrow": "Pass · local generation with Web Crypto",
+    "title": "A strong password. Yours alone.",
+    "description": "Set the rules and generate a password or passphrase with cryptographic randomness. Nothing is sent or stored.",
+    "back": "All tools",
+    "mode_label": "Format",
+    "modes": {
+      "password": "Random password",
+      "passphrase": "Passphrase"
+    },
+    "options": {
+      "length": "Number of characters",
+      "characters": "Allowed characters",
+      "lowercase": "Lowercase letters",
+      "uppercase": "Uppercase letters",
+      "numbers": "Numbers",
+      "symbols": "Symbols",
+      "exclude_ambiguous": "Avoid similar characters (O, 0, l, 1)",
+      "word_count": "Number of words",
+      "separator": "Separator",
+      "capitalize": "Start words with an uppercase letter",
+      "include_number": "Add a random number"
+    },
+    "separators": {
+      "hyphen": "Hyphen (-)",
+      "dot": "Period (.)",
+      "underscore": "Underscore (_)",
+      "space": "Space"
+    },
+    "generate": "Generate new",
+    "result_title": "Result",
+    "result_hint": "Use a different password for every service.",
+    "generating": "Generating securely…",
+    "copy": "Copy",
+    "copied": "Copied",
+    "entropy": "{bits} estimated bits",
+    "strength": {
+      "weak": "Low",
+      "fair": "Fair",
+      "strong": "Strong",
+      "veryStrong": "Very strong"
+    },
+    "privacy_title": "Generated on this device only",
+    "privacy_note": "Generation uses Web Crypto in your browser. The password is not sent over the network, saved by the site or included in the page address.",
+    "security_title": "Use it responsibly",
+    "entropy_note": "Entropy is a mathematical estimate that assumes uniform, independent choices. It cannot guarantee security after the password is copied or shared.",
+    "security_note": "Never reuse passwords. Store them in a trusted password manager and enable two-factor authentication whenever available.",
+    "errors": {
+      "unavailable": "A secret could not be generated. Make sure your browser supports Web Crypto.",
+      "copy": "Automatic copying failed. Select the result and copy it manually."
+    }
   }
 }

@@ -3,17 +3,25 @@ export const SITE_URL = "https://tools.belluzzi.dev";
 export const BELLUZZI_URL = "https://belluzzi.dev";
 export const REPOSITORY_URL =
   "https://github.com/heron-belluzzi/belluzzi-open-tools";
-export const QR_ALIAS_HOST = "qr.belluzzi.dev";
-
 export const locales = ["pt", "en"] as const;
 export type Locale = (typeof locales)[number];
 
 export const routeSlugs = {
   home: { pt: "", en: "" },
   qr: { pt: "qr", en: "qr" },
+  pass: { pt: "pass", en: "pass" },
 } as const;
 
 export type RouteKey = keyof typeof routeSlugs;
+
+export const TOOL_ALIAS_ROUTES: Partial<Record<string, RouteKey>> = {
+  "qr.belluzzi.dev": "qr",
+  "pass.belluzzi.dev": "pass",
+};
+
+export function aliasRouteForHost(hostname: string) {
+  return TOOL_ALIAS_ROUTES[hostname.trim().toLowerCase()] ?? null;
+}
 
 export function isLocale(value: string): value is Locale {
   return locales.includes(value as Locale);

@@ -101,7 +101,7 @@ export default async function OpenGraphImage({ params }: Props) {
           }}
         >
           <span>tools.belluzzi.dev</span>
-          <span>QR Code Studio</span>
+          <span>{isPt ? "Utilitários open source" : "Open source utilities"}</span>
         </div>
       </div>
     ),

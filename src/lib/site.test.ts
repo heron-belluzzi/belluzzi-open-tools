@@ -1,5 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { belluzziCampaignUrl, preferredLocale } from "./site";
+import {
+  aliasRouteForHost,
+  belluzziCampaignUrl,
+  preferredLocale,
+} from "./site";
 
 describe("preferredLocale", () => {
   it("uses English when it is the browser's strongest supported preference", () => {
@@ -23,5 +27,13 @@ describe("belluzziCampaignUrl", () => {
     expect(url.searchParams.get("utm_medium")).toBe("opensource");
     expect(url.searchParams.get("utm_campaign")).toBe("belluzzi_open_tools");
     expect(url.searchParams.get("utm_content")).toBe("qr_footer");
+  });
+});
+
+describe("aliasRouteForHost", () => {
+  it("maps each tool subdomain to its canonical route", () => {
+    expect(aliasRouteForHost("qr.belluzzi.dev")).toBe("qr");
+    expect(aliasRouteForHost("PASS.BELLUZZI.DEV")).toBe("pass");
+    expect(aliasRouteForHost("tools.belluzzi.dev")).toBeNull();
   });
 });

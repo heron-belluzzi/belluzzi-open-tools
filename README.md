@@ -6,7 +6,7 @@ Ferramentas gratuitas, open source e focadas em privacidade, mantidas pelo
 O projeto preserva a identidade visual do site principal do Belluzzi e oferece
 temas claro e escuro, português do Brasil e inglês.
 
-## Primeira versão
+## Ferramentas disponíveis
 
 - Hub de ferramentas em `/pt` e `/en`.
 - QR Code Studio em `/pt/qr` e `/en/qr`.
@@ -14,7 +14,11 @@ temas claro e escuro, português do Brasil e inglês.
 - Personalização de cores, tamanho, margem e correção de erro.
 - Logotipo central com correção de erro reforçada e validação de contraste.
 - Exportação PNG e SVG.
-- Processamento integral no navegador, sem persistência ou envio do conteúdo.
+- Gerador de senhas aleatórias com regras configuráveis e Web Crypto.
+- Gerador de passphrases com listas BIP39 em português e inglês.
+- Estimativa transparente de entropia, avisos de uso e cópia rápida.
+- Processamento integral no navegador, sem persistência ou envio do conteúdo
+  das ferramentas.
 
 ## Requisitos
 
@@ -66,16 +70,20 @@ query string e evitando fixar um idioma em caches compartilhados.
 O alias compartilha o site de `tools.belluzzi.dev` e utiliza certificado
 Let’s Encrypt com renovação automática administrada pelo CloudPanel.
 
+O código também está preparado para selecionar o idioma em
+`pass.belluzzi.dev` e encaminhar para `/pt/pass` ou `/en/pass`. A ativação desse
+alias depende do DNS e da inclusão no vhost/certificado da instância oficial.
+
 ## Privacidade
 
-O QR Code Studio não envia o conteúdo digitado para uma API. A composição e a
-renderização do QR Code são feitas no navegador. A aplicação pública não exige
-cadastro nem inclui anúncios de terceiros.
+O QR Code Studio e o Pass não enviam o conteúdo digitado ou gerado para uma
+API. A composição do QR e a geração criptográfica acontecem no navegador. A
+aplicação pública não exige cadastro nem inclui anúncios de terceiros.
 
 ## Roadmap
 
-1. QR Code Studio.
-2. Gerador de senhas e passphrases.
+1. QR Code Studio — disponível.
+2. Gerador de senhas e passphrases — disponível.
 3. Criador de UTMs e links para WhatsApp.
 4. Toolkit de JSON, YAML e CSV.
 5. Produtos independentes como SiteCheck e Hook.
@@ -83,8 +91,9 @@ cadastro nem inclui anúncios de terceiros.
 ## English
 
 Belluzzi Open Tools is a privacy-first collection of free and open source web
-utilities. The first release includes a browser-only QR Code Studio with light
-and dark themes and Brazilian Portuguese/English localization.
+utilities. It includes a browser-only QR Code Studio and a Web Crypto password
+and passphrase generator, with light/dark themes and Brazilian
+Portuguese/English localization.
 
 ## Licença
 

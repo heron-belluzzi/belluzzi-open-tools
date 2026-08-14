@@ -25,13 +25,25 @@ Este documento acompanha o estado real do repositório e da instância oficial.
 - [x] DNS, vhost e TLS Let’s Encrypt com renovação automática para o alias.
 - [ ] Publicar o case correspondente em `belluzzi.dev`.
 
+## Pass — segunda release
+
+- [x] Senhas aleatórias usando Web Crypto e amostragem sem viés.
+- [x] Regras de tamanho, letras, números, símbolos e caracteres ambíguos.
+- [x] Passphrases BIP39 em português e inglês.
+- [x] Estimativa explicada de entropia e faixas de força.
+- [x] Geração e cópia locais, sem persistência ou chamadas de rede.
+- [x] Mobile, teclado, temas, PT/EN, testes unitários, E2E e acessibilidade.
+- [x] Roteamento preparado para seleção automática PT/EN em
+  `pass.belluzzi.dev`.
+- [ ] Ativar DNS, vhost e TLS para `pass.belluzzi.dev`.
+- [ ] Publicar o case correspondente em `belluzzi.dev`.
+
 ## Próximas ferramentas
 
-1. **Pass:** senhas e passphrases usando Web Crypto.
-2. **UTM/WhatsApp Builder:** presets locais e integração com o QR Studio.
-3. **Data Toolkit:** JSON, YAML e CSV processados no navegador.
-4. **SiteCheck:** primeiro produto independente, em `check.belluzzi.dev`.
-5. **Hook:** inbox temporário e seguro para webhooks.
+1. **UTM/WhatsApp Builder:** presets locais e integração com o QR Studio.
+2. **Data Toolkit:** JSON, YAML e CSV processados no navegador.
+3. **SiteCheck:** primeiro produto independente, em `check.belluzzi.dev`.
+4. **Hook:** inbox temporário e seguro para webhooks.
 
 ## Definição de pronto
 

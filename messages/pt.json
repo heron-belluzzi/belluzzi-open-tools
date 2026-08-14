@@ -136,5 +136,59 @@
     "security_open": "Sem senha",
     "security_wpa": "WPA / WPA2",
     "security_wep": "WEP"
+  },
+  "pass": {
+    "meta_title": "Gerador de senhas seguras e passphrases",
+    "meta_description": "Gere senhas fortes e passphrases no navegador com Web Crypto. Gratuito, open source e sem enviar ou armazenar seus dados.",
+    "eyebrow": "Pass · geração local com Web Crypto",
+    "title": "Uma senha forte. Só sua.",
+    "description": "Defina as regras e gere uma senha ou passphrase com aleatoriedade criptográfica. Nada é enviado ou armazenado.",
+    "back": "Todas as ferramentas",
+    "mode_label": "Formato",
+    "modes": {
+      "password": "Senha aleatória",
+      "passphrase": "Passphrase"
+    },
+    "options": {
+      "length": "Quantidade de caracteres",
+      "characters": "Caracteres permitidos",
+      "lowercase": "Letras minúsculas",
+      "uppercase": "Letras maiúsculas",
+      "numbers": "Números",
+      "symbols": "Símbolos",
+      "exclude_ambiguous": "Evitar caracteres parecidos (O, 0, l, 1)",
+      "word_count": "Quantidade de palavras",
+      "separator": "Separador",
+      "capitalize": "Iniciar palavras com letra maiúscula",
+      "include_number": "Adicionar um número aleatório"
+    },
+    "separators": {
+      "hyphen": "Hífen (-)",
+      "dot": "Ponto (.)",
+      "underscore": "Sublinhado (_)",
+      "space": "Espaço"
+    },
+    "generate": "Gerar nova",
+    "result_title": "Resultado",
+    "result_hint": "Use uma senha diferente em cada serviço.",
+    "generating": "Gerando com segurança…",
+    "copy": "Copiar",
+    "copied": "Copiado",
+    "entropy": "{bits} bits estimados",
+    "strength": {
+      "weak": "Baixa",
+      "fair": "Razoável",
+      "strong": "Forte",
+      "veryStrong": "Muito forte"
+    },
+    "privacy_title": "Gerada só neste dispositivo",
+    "privacy_note": "A geração usa Web Crypto no seu navegador. A senha não é enviada pela rede, salva pelo site ou incluída no endereço da página.",
+    "security_title": "Use com responsabilidade",
+    "entropy_note": "A entropia é uma estimativa matemática que pressupõe escolhas uniformes e independentes. Ela não garante segurança depois que a senha é copiada ou compartilhada.",
+    "security_note": "Não reutilize senhas. Prefira guardá-las em um gerenciador de senhas confiável e ative autenticação em dois fatores quando disponível.",
+    "errors": {
+      "unavailable": "Não foi possível gerar agora. Confirme se o navegador oferece suporte ao Web Crypto.",
+      "copy": "Não foi possível copiar automaticamente. Selecione o resultado e copie manualmente."
+    }
   }
 }
