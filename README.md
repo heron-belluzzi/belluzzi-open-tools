@@ -10,8 +10,9 @@ temas claro e escuro, português do Brasil e inglês.
 
 - Hub de ferramentas em `/pt` e `/en`.
 - QR Code Studio em `/pt/qr` e `/en/qr`.
-- QR Codes para URL, texto, Wi-Fi, vCard, WhatsApp e e-mail.
+- QR Codes para URL, texto, Wi-Fi, vCard, eventos, WhatsApp e e-mail.
 - Personalização de cores, tamanho, margem e correção de erro.
+- Logotipo central com correção de erro reforçada e validação de contraste.
 - Exportação PNG e SVG.
 - Processamento integral no navegador, sem persistência ou envio do conteúdo.
 
@@ -36,6 +37,7 @@ npm run lint
 npm run typecheck
 npm test
 npm run build
+npm run test:e2e
 ```
 
 ## Docker
@@ -49,6 +51,17 @@ pode ser alterada com `APP_PORT`.
 
 O procedimento da instância oficial está em
 [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
+
+## Domínio curto do QR Code
+
+Quando `qr.belluzzi.dev` estiver apontado e adicionado ao certificado do site,
+a aplicação selecionará o destino pelo idioma do navegador:
+
+- português: `https://tools.belluzzi.dev/pt/qr`;
+- inglês: `https://tools.belluzzi.dev/en/qr`.
+
+O redirecionamento negociado usa `307` e `Vary: Accept-Language`, preservando a
+query string e evitando fixar um idioma em caches compartilhados.
 
 ## Privacidade
 

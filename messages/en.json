@@ -38,7 +38,7 @@
     "tools_title": "Choose a tool.",
     "tools_description": "We start with the essentials. New utilities arrive when they solve a problem clearly.",
     "qr_title": "QR Code Studio",
-    "qr_description": "Create QR codes for links, Wi-Fi, contacts, WhatsApp, email and text. Export PNG or SVG.",
+    "qr_description": "Create QR codes for links, Wi-Fi, contacts, events, WhatsApp, email and text. Export PNG or SVG.",
     "pass_title": "Pass",
     "pass_description": "Secure passwords and passphrases generated entirely in your browser.",
     "utm_title": "UTM Builder",
@@ -60,7 +60,7 @@
   },
   "qr": {
     "meta_title": "Free QR Code generator",
-    "meta_description": "Create free QR codes for links, Wi-Fi, contacts, WhatsApp, email and text. Local processing with PNG or SVG export.",
+    "meta_description": "Create free QR codes for links, Wi-Fi, contacts, events, WhatsApp, email and text. Local processing with PNG or SVG export.",
     "eyebrow": "QR Code Studio · local processing",
     "title": "A QR code ready to use.",
     "description": "Choose the content, adjust its appearance and download it. Nothing you type is sent to our servers.",
@@ -72,6 +72,7 @@
       "text": "Text",
       "wifi": "Wi-Fi",
       "contact": "Contact",
+      "event": "Event",
       "whatsapp": "WhatsApp",
       "email": "Email"
     },
@@ -97,7 +98,12 @@
       "message_placeholder": "Hello! I would like to learn more.",
       "email_address": "Recipient",
       "subject": "Subject",
-      "body": "Message"
+      "body": "Message",
+      "event_title": "Event title",
+      "event_start": "Start",
+      "event_end": "End",
+      "event_location": "Location",
+      "event_description": "Description"
     },
     "options_title": "Appearance",
     "foreground": "QR code color",
@@ -105,6 +111,12 @@
     "size": "Size",
     "margin": "Margin",
     "correction": "Error correction",
+    "logo": "Centered logo",
+    "logo_hint": "PNG, JPEG or WebP up to 1 MB. Error correction H is enabled automatically.",
+    "logo_choose": "Choose image",
+    "logo_remove": "Remove logo",
+    "contrast_good": "Good contrast ({ratio}:1)",
+    "contrast_low": "Low contrast ({ratio}:1). Use more distinct colors to improve scanning.",
     "preview_title": "Preview",
     "preview_hint": "The preview updates automatically.",
     "empty_preview": "Fill in the content to generate a preview.",
@@ -115,7 +127,11 @@
     "status_error": "This QR code could not be generated.",
     "errors": {
       "required": "Fill in the main field to generate the QR code.",
-      "phone": "Enter a number with country and area code."
+      "phone": "Enter a number with country and area code.",
+      "event_dates": "Enter a start and end time; the event must end after it starts.",
+      "logo_type": "Use a PNG, JPEG or WebP image.",
+      "logo_size": "The logo must be 1 MB or smaller.",
+      "logo_read": "This logo could not be read."
     },
     "security_open": "No password",
     "security_wpa": "WPA / WPA2",

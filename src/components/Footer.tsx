@@ -2,7 +2,7 @@
 
 import { useLocale, useTranslations } from "next-intl";
 import {
-  BELLUZZI_URL,
+  belluzziCampaignUrl,
   isLocale,
   localizedPath,
   REPOSITORY_URL,
@@ -41,7 +41,7 @@ export default function Footer() {
               {t("source")}
             </a>
             <a
-              href={BELLUZZI_URL}
+              href={belluzziCampaignUrl(locale, "footer_services")}
               target="_blank"
               rel="noopener noreferrer"
               className="transition-colors hover:text-accent"

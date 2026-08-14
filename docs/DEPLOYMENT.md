@@ -8,6 +8,7 @@ senhas, chaves privadas ou tokens.
 | Item | Valor |
 |---|---|
 | Domínio | `tools.belluzzi.dev` |
+| Alias preparado | `qr.belluzzi.dev` |
 | Tipo do site | Node.js |
 | Servidor | `34.138.211.55` |
 | SSH | Porta `22`, chave PuTTY da sessão `Augmentum` |
@@ -71,6 +72,29 @@ Externamente, verificar:
 - `/pt`, `/en`, `/pt/qr` e `/en/qr` respondem via HTTPS.
 - Tema claro/escuro, alternância de idioma e exportações do QR funcionam.
 - `robots.txt`, `sitemap.xml` e `/api/health` estão acessíveis.
+
+## Ativação futura de `qr.belluzzi.dev`
+
+A aplicação já reconhece o host `qr.belluzzi.dev`. Quando o DNS for apontado:
+
+1. Crie o registro DNS do alias para a mesma infraestrutura de
+   `tools.belluzzi.dev`.
+2. Adicione `qr.belluzzi.dev` como domínio adicional do site no CloudPanel.
+3. Emita ou renove o certificado TLS incluindo o alias.
+4. Não crie redirecionamento fixo para português no Nginx: encaminhe o host para
+   a mesma aplicação na porta `3020`.
+
+Ao receber `/`, a aplicação lê `Accept-Language`, preserva a query string e
+responde com `307` para `/pt/qr` ou `/en/qr` no domínio canônico. A resposta
+inclui `Vary: Accept-Language` para não misturar idiomas em cache.
+
+Antes do DNS, o comportamento pode ser conferido na origem:
+
+```bash
+curl -I http://127.0.0.1:3020/ \
+  -H 'Host: qr.belluzzi.dev' \
+  -H 'Accept-Language: en-US,en;q=0.9'
+```
 
 ## Segredos
 

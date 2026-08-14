@@ -3,6 +3,7 @@ export const SITE_URL = "https://tools.belluzzi.dev";
 export const BELLUZZI_URL = "https://belluzzi.dev";
 export const REPOSITORY_URL =
   "https://github.com/heron-belluzzi/belluzzi-open-tools";
+export const QR_ALIAS_HOST = "qr.belluzzi.dev";
 
 export const locales = ["pt", "en"] as const;
 export type Locale = (typeof locales)[number];
@@ -16,6 +17,51 @@ export type RouteKey = keyof typeof routeSlugs;
 
 export function isLocale(value: string): value is Locale {
   return locales.includes(value as Locale);
+}
+
+export function preferredLocale(acceptLanguage?: string | null): Locale {
+  if (!acceptLanguage) return "pt";
+
+  const preferences = acceptLanguage
+    .split(",")
+    .map((entry, index) => {
+      const [languagePart, ...parameters] = entry.trim().split(";");
+      const qualityParameter = parameters.find((parameter) =>
+        parameter.trim().startsWith("q="),
+      );
+      const parsedQuality = qualityParameter
+        ? Number.parseFloat(qualityParameter.trim().slice(2))
+        : 1;
+
+      return {
+        language: languagePart.toLowerCase(),
+        quality: Number.isFinite(parsedQuality) ? parsedQuality : 0,
+        index,
+      };
+    })
+    .filter(({ language, quality }) => language && quality > 0)
+    .sort((left, right) => right.quality - left.quality || left.index - right.index);
+
+  for (const { language } of preferences) {
+    const primaryLanguage = language.split("-")[0];
+    if (primaryLanguage === "pt" || primaryLanguage === "en") {
+      return primaryLanguage;
+    }
+  }
+
+  return "pt";
+}
+
+export function belluzziCampaignUrl(
+  locale: Locale,
+  content: string,
+) {
+  const url = new URL(`/${locale}`, BELLUZZI_URL);
+  url.searchParams.set("utm_source", "tools_belluzzi");
+  url.searchParams.set("utm_medium", "opensource");
+  url.searchParams.set("utm_campaign", "belluzzi_open_tools");
+  url.searchParams.set("utm_content", content);
+  return url.toString();
 }
 
 export function localizedPath(locale: Locale, route: RouteKey) {

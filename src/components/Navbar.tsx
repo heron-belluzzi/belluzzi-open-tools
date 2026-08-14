@@ -6,7 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import {
   alternateLocalePath,
-  BELLUZZI_URL,
+  belluzziCampaignUrl,
   isLocale,
   localizedPath,
   REPOSITORY_URL,
@@ -38,7 +38,11 @@ export default function Navbar() {
   const links = [
     { label: t("tools"), href: `${home}#tools`, external: false },
     { label: t("source"), href: REPOSITORY_URL, external: true },
-    { label: t("belluzzi"), href: BELLUZZI_URL, external: true },
+    {
+      label: t("belluzzi"),
+      href: belluzziCampaignUrl(locale, "navigation"),
+      external: true,
+    },
   ];
 
   return (

@@ -17,6 +17,7 @@ npm run lint
 npm run typecheck
 npm test
 npm run build
+npm run test:e2e
 ```
 
 Inclua testes para regras de negócio e descreva no pull request como a interface

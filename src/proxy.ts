@@ -1,7 +1,35 @@
 import createMiddleware from "next-intl/middleware";
+import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 import { routing } from "./i18n/config";
+import {
+  localizedPath,
+  preferredLocale,
+  QR_ALIAS_HOST,
+  SITE_URL,
+} from "./lib/site";
 
-export default createMiddleware(routing);
+const intlMiddleware = createMiddleware(routing);
+
+function requestHostname(request: NextRequest) {
+  const forwardedHost = request.headers.get("x-forwarded-host")?.split(",")[0];
+  const host = forwardedHost ?? request.headers.get("host") ?? request.nextUrl.host;
+  return host.trim().toLowerCase().split(":")[0];
+}
+
+export default function proxy(request: NextRequest) {
+  if (requestHostname(request) === QR_ALIAS_HOST) {
+    const locale = preferredLocale(request.headers.get("accept-language"));
+    const target = new URL(localizedPath(locale, "qr"), SITE_URL);
+    target.search = request.nextUrl.search;
+
+    const response = NextResponse.redirect(target, 307);
+    response.headers.set("Vary", "Accept-Language");
+    return response;
+  }
+
+  return intlMiddleware(request);
+}
 
 export const config = {
   matcher: ["/((?!api|_next|_vercel|.*\\..*).*)"],

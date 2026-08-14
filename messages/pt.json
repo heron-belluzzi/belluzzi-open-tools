@@ -38,7 +38,7 @@
     "tools_title": "Escolha uma ferramenta.",
     "tools_description": "Começamos pelo essencial. Novos utilitários entram quando resolvem um problema com clareza.",
     "qr_title": "QR Code Studio",
-    "qr_description": "Crie QR Codes para links, Wi-Fi, contatos, WhatsApp, e-mail e texto. Exporte em PNG ou SVG.",
+    "qr_description": "Crie QR Codes para links, Wi-Fi, contatos, eventos, WhatsApp, e-mail e texto. Exporte em PNG ou SVG.",
     "pass_title": "Pass",
     "pass_description": "Senhas e passphrases seguras, geradas inteiramente no navegador.",
     "utm_title": "UTM Builder",
@@ -60,7 +60,7 @@
   },
   "qr": {
     "meta_title": "Gerador de QR Code gratuito",
-    "meta_description": "Crie QR Codes gratuitos para links, Wi-Fi, contatos, WhatsApp, e-mail e texto. Processamento local e exportação PNG ou SVG.",
+    "meta_description": "Crie QR Codes gratuitos para links, Wi-Fi, contatos, eventos, WhatsApp, e-mail e texto. Processamento local e exportação PNG ou SVG.",
     "eyebrow": "QR Code Studio · processamento local",
     "title": "Um QR Code pronto para usar.",
     "description": "Escolha o conteúdo, ajuste a aparência e baixe. Nada do que você digita é enviado para nossos servidores.",
@@ -72,6 +72,7 @@
       "text": "Texto",
       "wifi": "Wi-Fi",
       "contact": "Contato",
+      "event": "Evento",
       "whatsapp": "WhatsApp",
       "email": "E-mail"
     },
@@ -97,7 +98,12 @@
       "message_placeholder": "Olá! Gostaria de saber mais.",
       "email_address": "Destinatário",
       "subject": "Assunto",
-      "body": "Mensagem"
+      "body": "Mensagem",
+      "event_title": "Título do evento",
+      "event_start": "Início",
+      "event_end": "Término",
+      "event_location": "Local",
+      "event_description": "Descrição"
     },
     "options_title": "Aparência",
     "foreground": "Cor do QR Code",
@@ -105,6 +111,12 @@
     "size": "Tamanho",
     "margin": "Margem",
     "correction": "Correção de erro",
+    "logo": "Logotipo central",
+    "logo_hint": "PNG, JPEG ou WebP de até 1 MB. A correção H é ativada automaticamente.",
+    "logo_choose": "Escolher imagem",
+    "logo_remove": "Remover logotipo",
+    "contrast_good": "Contraste adequado ({ratio}:1)",
+    "contrast_low": "Contraste baixo ({ratio}:1). Use cores mais diferentes para facilitar a leitura.",
     "preview_title": "Prévia",
     "preview_hint": "A prévia é atualizada automaticamente.",
     "empty_preview": "Preencha o conteúdo para gerar a prévia.",
@@ -115,7 +127,11 @@
     "status_error": "Não foi possível gerar este QR Code.",
     "errors": {
       "required": "Preencha o campo principal para gerar o QR Code.",
-      "phone": "Informe um número com DDI e DDD."
+      "phone": "Informe um número com DDI e DDD.",
+      "event_dates": "Informe início e término; o término deve ocorrer depois do início.",
+      "logo_type": "Use uma imagem PNG, JPEG ou WebP.",
+      "logo_size": "O logotipo deve ter no máximo 1 MB.",
+      "logo_read": "Não foi possível ler este logotipo."
     },
     "security_open": "Sem senha",
     "security_wpa": "WPA / WPA2",

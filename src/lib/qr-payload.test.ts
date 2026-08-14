@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   buildContactPayload,
   buildEmailPayload,
+  buildEventPayload,
   buildWhatsAppPayload,
   buildWifiPayload,
   normalizeWebUrl,
@@ -76,5 +77,24 @@ describe("buildEmailPayload", () => {
     ).toBe(
       "mailto:hello@example.com?subject=New+project&body=Hello+world",
     );
+  });
+});
+
+describe("buildEventPayload", () => {
+  it("creates an iCalendar event with escaped fields", () => {
+    const payload = buildEventPayload({
+      title: "Launch, Belluzzi",
+      start: "2026-08-20T09:30",
+      end: "2026-08-20T10:30",
+      location: "Office; Room 2",
+      description: "Open tools\nRelease",
+    });
+
+    expect(payload).toContain("SUMMARY:Launch\\, Belluzzi");
+    expect(payload).toContain("DTSTART:20260820T093000");
+    expect(payload).toContain("DTEND:20260820T103000");
+    expect(payload).toContain("LOCATION:Office\\; Room 2");
+    expect(payload).toContain("DESCRIPTION:Open tools\\nRelease");
+    expect(payload).toMatch(/END:VCALENDAR$/);
   });
 });

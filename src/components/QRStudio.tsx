@@ -3,18 +3,37 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import QRCode from "qrcode";
-import { useEffect, useMemo, useState } from "react";
+import { type KeyboardEvent, useEffect, useMemo, useState } from "react";
 import {
   buildContactPayload,
   buildEmailPayload,
+  buildEventPayload,
   buildWhatsAppPayload,
   buildWifiPayload,
   normalizeWebUrl,
   type WifiEncryption,
 } from "@/lib/qr-payload";
+import {
+  addLogoToSvg,
+  contrastRatio,
+  MIN_QR_CONTRAST,
+} from "@/lib/qr-design";
 
-type ContentType = "url" | "text" | "wifi" | "contact" | "whatsapp" | "email";
+type ContentType =
+  | "url"
+  | "text"
+  | "wifi"
+  | "contact"
+  | "event"
+  | "whatsapp"
+  | "email";
 type ErrorCorrection = "L" | "M" | "Q" | "H";
+
+type LogoState = {
+  dataUrl: string;
+  key: string;
+  name: string;
+};
 
 type FormState = {
   url: string;
@@ -33,6 +52,11 @@ type FormState = {
   emailAddress: string;
   subject: string;
   body: string;
+  eventTitle: string;
+  eventStart: string;
+  eventEnd: string;
+  eventLocation: string;
+  eventDescription: string;
 };
 
 const initialForm: FormState = {
@@ -52,6 +76,11 @@ const initialForm: FormState = {
   emailAddress: "",
   subject: "",
   body: "",
+  eventTitle: "",
+  eventStart: "",
+  eventEnd: "",
+  eventLocation: "",
+  eventDescription: "",
 };
 
 const fieldClass =
@@ -67,6 +96,77 @@ function setDownload(data: string, filename: string) {
   anchor.remove();
 }
 
+function readFileAsDataUrl(file: File) {
+  return new Promise<string>((resolve, reject) => {
+    const reader = new FileReader();
+    reader.addEventListener("load", () => {
+      if (typeof reader.result === "string") resolve(reader.result);
+      else reject(new Error("Invalid file result"));
+    });
+    reader.addEventListener("error", () => reject(reader.error));
+    reader.readAsDataURL(file);
+  });
+}
+
+function loadImage(source: string) {
+  return new Promise<HTMLImageElement>((resolve, reject) => {
+    const image = new window.Image();
+    image.addEventListener("load", () => resolve(image));
+    image.addEventListener("error", () => reject(new Error("Image load failed")));
+    image.src = source;
+  });
+}
+
+async function addLogoToPng(
+  qrDataUrl: string,
+  logoDataUrl: string,
+  background: string,
+  size: number,
+) {
+  const [qrImage, logoImage] = await Promise.all([
+    loadImage(qrDataUrl),
+    loadImage(logoDataUrl),
+  ]);
+  const canvas = document.createElement("canvas");
+  canvas.width = size;
+  canvas.height = size;
+  const context = canvas.getContext("2d");
+  if (!context) throw new Error("Canvas is unavailable");
+
+  context.drawImage(qrImage, 0, 0, size, size);
+
+  const plateSize = size * 0.24;
+  const logoBoxSize = size * 0.18;
+  const plateOffset = (size - plateSize) / 2;
+  const plateRadius = size * 0.025;
+  context.fillStyle = background;
+  context.beginPath();
+  context.roundRect(
+    plateOffset,
+    plateOffset,
+    plateSize,
+    plateSize,
+    plateRadius,
+  );
+  context.fill();
+
+  const scale = Math.min(
+    logoBoxSize / logoImage.naturalWidth,
+    logoBoxSize / logoImage.naturalHeight,
+  );
+  const logoWidth = logoImage.naturalWidth * scale;
+  const logoHeight = logoImage.naturalHeight * scale;
+  context.drawImage(
+    logoImage,
+    (size - logoWidth) / 2,
+    (size - logoHeight) / 2,
+    logoWidth,
+    logoHeight,
+  );
+
+  return canvas.toDataURL("image/png");
+}
+
 export default function QRStudio() {
   const t = useTranslations("qr");
   const common = useTranslations("common");
@@ -77,6 +177,9 @@ export default function QRStudio() {
   const [size, setSize] = useState(512);
   const [margin, setMargin] = useState(3);
   const [correction, setCorrection] = useState<ErrorCorrection>("M");
+  const [logo, setLogo] = useState<LogoState | null>(null);
+  const [logoError, setLogoError] = useState("");
+  const [logoInputKey, setLogoInputKey] = useState(0);
   const [previewState, setPreviewState] = useState({
     key: "",
     dataUrl: "",
@@ -88,6 +191,7 @@ export default function QRStudio() {
     { value: "text", label: t("types.text") },
     { value: "wifi", label: t("types.wifi") },
     { value: "contact", label: t("types.contact") },
+    { value: "event", label: t("types.event") },
     { value: "whatsapp", label: t("types.whatsapp") },
     { value: "email", label: t("types.email") },
   ];
@@ -127,6 +231,27 @@ export default function QRStudio() {
               error: "",
             }
           : { payload: "", error: t("errors.required") };
+      case "event":
+        if (!form.eventTitle.trim()) {
+          return { payload: "", error: t("errors.required") };
+        }
+        if (
+          !form.eventStart ||
+          !form.eventEnd ||
+          form.eventEnd <= form.eventStart
+        ) {
+          return { payload: "", error: t("errors.event_dates") };
+        }
+        return {
+          payload: buildEventPayload({
+            title: form.eventTitle,
+            start: form.eventStart,
+            end: form.eventEnd,
+            location: form.eventLocation,
+            description: form.eventDescription,
+          }),
+          error: "",
+        };
       case "whatsapp": {
         const phoneDigits = form.whatsappPhone.replace(/\D/g, "");
         if (!phoneDigits) return { payload: "", error: t("errors.required") };
@@ -150,8 +275,20 @@ export default function QRStudio() {
     }
   }, [contentType, form, t]);
 
+  const effectiveCorrection: ErrorCorrection = logo ? "H" : correction;
+  const ratio = contrastRatio(foreground, background);
+  const lowContrast = ratio < MIN_QR_CONTRAST;
+
   const generationKey = result.payload
-    ? [result.payload, foreground, background, size, margin, correction].join("\u0000")
+    ? [
+        result.payload,
+        foreground,
+        background,
+        size,
+        margin,
+        effectiveCorrection,
+        logo?.key ?? "",
+      ].join("\u0000")
     : "";
   const preview = previewState.key === generationKey ? previewState.dataUrl : "";
   const generationError =
@@ -168,9 +305,14 @@ export default function QRStudio() {
       QRCode.toDataURL(result.payload, {
         width: size,
         margin,
-        errorCorrectionLevel: correction,
+        errorCorrectionLevel: effectiveCorrection,
         color: { dark: foreground, light: background },
       })
+        .then((dataUrl) =>
+          logo
+            ? addLogoToPng(dataUrl, logo.dataUrl, background, size)
+            : dataUrl,
+        )
         .then((dataUrl) => {
           if (!cancelled) {
             setPreviewState({ key: generationKey, dataUrl, error: false });
@@ -187,10 +329,41 @@ export default function QRStudio() {
       cancelled = true;
       window.clearTimeout(timer);
     };
-  }, [background, correction, foreground, generationKey, margin, result.payload, size]);
+  }, [
+    background,
+    effectiveCorrection,
+    foreground,
+    generationKey,
+    logo,
+    margin,
+    result.payload,
+    size,
+  ]);
 
   function update<K extends keyof FormState>(field: K, value: FormState[K]) {
     setForm((current) => ({ ...current, [field]: value }));
+  }
+
+  function navigateTypeTabs(
+    event: KeyboardEvent<HTMLButtonElement>,
+    currentIndex: number,
+  ) {
+    let nextIndex: number | null = null;
+    if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+      nextIndex = (currentIndex + 1) % types.length;
+    } else if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+      nextIndex = (currentIndex - 1 + types.length) % types.length;
+    } else if (event.key === "Home") {
+      nextIndex = 0;
+    } else if (event.key === "End") {
+      nextIndex = types.length - 1;
+    }
+
+    if (nextIndex === null) return;
+    event.preventDefault();
+    const nextType = types[nextIndex];
+    setContentType(nextType.value);
+    document.getElementById(`qr-tab-${nextType.value}`)?.focus();
   }
 
   async function downloadSvg() {
@@ -199,11 +372,49 @@ export default function QRStudio() {
       type: "svg",
       width: size,
       margin,
-      errorCorrectionLevel: correction,
+      errorCorrectionLevel: effectiveCorrection,
       color: { dark: foreground, light: background },
     });
-    const data = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+    const finishedSvg = logo
+      ? addLogoToSvg(svg, logo.dataUrl, background)
+      : svg;
+    const data = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(finishedSvg)}`;
     setDownload(data, `belluzzi-qr-${contentType}.svg`);
+  }
+
+  async function selectLogo(file?: File) {
+    setLogoError("");
+    if (!file) return;
+    if (!["image/png", "image/jpeg", "image/webp"].includes(file.type)) {
+      setLogoError(t("errors.logo_type"));
+      setLogoInputKey((key) => key + 1);
+      return;
+    }
+    if (file.size > 1024 * 1024) {
+      setLogoError(t("errors.logo_size"));
+      setLogoInputKey((key) => key + 1);
+      return;
+    }
+
+    try {
+      const dataUrl = await readFileAsDataUrl(file);
+      await loadImage(dataUrl);
+      setLogo({
+        dataUrl,
+        key: `${file.name}:${file.size}:${file.lastModified}`,
+        name: file.name,
+      });
+      setCorrection("H");
+    } catch {
+      setLogoError(t("errors.logo_read"));
+      setLogoInputKey((key) => key + 1);
+    }
+  }
+
+  function removeLogo() {
+    setLogo(null);
+    setLogoError("");
+    setLogoInputKey((key) => key + 1);
   }
 
   function reset() {
@@ -213,6 +424,9 @@ export default function QRStudio() {
     setSize(512);
     setMargin(3);
     setCorrection("M");
+    setLogo(null);
+    setLogoError("");
+    setLogoInputKey((key) => key + 1);
   }
 
   return (
@@ -220,14 +434,18 @@ export default function QRStudio() {
       <div className="space-y-6">
         <section className="rounded-2xl border border-border bg-surface p-5 shadow-card sm:p-7">
           <p className={labelClass}>{t("types_label")}</p>
-          <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3" role="tablist" aria-label={t("types_label")}>
-            {types.map((type) => (
+          <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4" role="tablist" aria-label={t("types_label")}>
+            {types.map((type, index) => (
               <button
                 key={type.value}
+                id={`qr-tab-${type.value}`}
                 type="button"
                 role="tab"
                 aria-selected={contentType === type.value}
+                aria-controls={`qr-panel-${type.value}`}
+                tabIndex={contentType === type.value ? 0 : -1}
                 onClick={() => setContentType(type.value)}
+                onKeyDown={(event) => navigateTypeTabs(event, index)}
                 className={`min-h-10 rounded-lg border px-3 py-2 font-mono text-[10px] uppercase tracking-widest transition-colors ${
                   contentType === type.value
                     ? "border-accent bg-accent text-white"
@@ -239,7 +457,13 @@ export default function QRStudio() {
             ))}
           </div>
 
-          <div className="mt-7 border-t border-border pt-6">
+          <div
+            id={`qr-panel-${contentType}`}
+            role="tabpanel"
+            aria-labelledby={`qr-tab-${contentType}`}
+            tabIndex={0}
+            className="mt-7 border-t border-border pt-6"
+          >
             {contentType === "url" && (
               <label className="block">
                 <span className={labelClass}>{t("fields.url")}</span>
@@ -340,6 +564,55 @@ export default function QRStudio() {
               </div>
             )}
 
+            {contentType === "event" && (
+              <div className="grid gap-5 sm:grid-cols-2">
+                <label className="block sm:col-span-2">
+                  <span className={labelClass}>{t("fields.event_title")}</span>
+                  <input
+                    value={form.eventTitle}
+                    onChange={(event) => update("eventTitle", event.target.value)}
+                    className={fieldClass}
+                  />
+                </label>
+                <label className="block">
+                  <span className={labelClass}>{t("fields.event_start")}</span>
+                  <input
+                    type="datetime-local"
+                    value={form.eventStart}
+                    onChange={(event) => update("eventStart", event.target.value)}
+                    className={fieldClass}
+                  />
+                </label>
+                <label className="block">
+                  <span className={labelClass}>{t("fields.event_end")}</span>
+                  <input
+                    type="datetime-local"
+                    value={form.eventEnd}
+                    min={form.eventStart || undefined}
+                    onChange={(event) => update("eventEnd", event.target.value)}
+                    className={fieldClass}
+                  />
+                </label>
+                <label className="block sm:col-span-2">
+                  <span className={labelClass}>{t("fields.event_location")}</span>
+                  <input
+                    value={form.eventLocation}
+                    onChange={(event) => update("eventLocation", event.target.value)}
+                    className={fieldClass}
+                  />
+                </label>
+                <label className="block sm:col-span-2">
+                  <span className={labelClass}>{t("fields.event_description")}</span>
+                  <textarea
+                    value={form.eventDescription}
+                    onChange={(event) => update("eventDescription", event.target.value)}
+                    className={`${fieldClass} min-h-24 resize-y`}
+                    rows={3}
+                  />
+                </label>
+              </div>
+            )}
+
             {contentType === "whatsapp" && (
               <div className="grid gap-5">
                 <label className="block">
@@ -412,6 +685,19 @@ export default function QRStudio() {
                 <span className="font-mono text-xs uppercase text-muted">{background}</span>
               </span>
             </label>
+            <div className="sm:col-span-2" aria-live="polite">
+              <p
+                className={`rounded-lg border px-3.5 py-3 text-sm ${
+                  lowContrast
+                    ? "border-accent/40 bg-accent/5 text-accent"
+                    : "border-success/30 bg-success/5 text-success"
+                }`}
+              >
+                {t(lowContrast ? "contrast_low" : "contrast_good", {
+                  ratio: ratio.toFixed(1),
+                })}
+              </p>
+            </div>
             <label className="block sm:col-span-2">
               <span className="flex items-center justify-between gap-4">
                 <span className={labelClass}>{t("size")}</span>
@@ -427,10 +713,58 @@ export default function QRStudio() {
             </label>
             <label className="block">
               <span className={labelClass}>{t("correction")}</span>
-              <select value={correction} onChange={(event) => setCorrection(event.target.value as ErrorCorrection)} className={fieldClass}>
+              <select
+                value={effectiveCorrection}
+                onChange={(event) => setCorrection(event.target.value as ErrorCorrection)}
+                className={fieldClass}
+                disabled={Boolean(logo)}
+              >
                 {(["L", "M", "Q", "H"] as const).map((value) => <option key={value} value={value}>{value}</option>)}
               </select>
             </label>
+            <div className="rounded-xl border border-border bg-bg p-4 sm:col-span-2">
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <p className={labelClass}>{t("logo")}</p>
+                  <p className="mt-2 text-xs leading-5 text-faint">{t("logo_hint")}</p>
+                  {logo && (
+                    <p className="mt-2 max-w-sm truncate font-mono text-xs text-muted">
+                      {logo.name}
+                    </p>
+                  )}
+                </div>
+                <div className="flex shrink-0 flex-wrap gap-2">
+                  <label
+                    htmlFor="qr-logo"
+                    className="inline-flex min-h-10 cursor-pointer items-center rounded-lg border border-border-strong bg-surface px-4 py-2 font-mono text-[10px] font-semibold uppercase tracking-widest text-ink transition-colors hover:border-accent hover:text-accent"
+                  >
+                    {t("logo_choose")}
+                  </label>
+                  <input
+                    key={logoInputKey}
+                    id="qr-logo"
+                    type="file"
+                    accept="image/png,image/jpeg,image/webp"
+                    className="sr-only"
+                    onChange={(event) => void selectLogo(event.target.files?.[0])}
+                  />
+                  {logo && (
+                    <button
+                      type="button"
+                      onClick={removeLogo}
+                      className="min-h-10 rounded-lg px-3 py-2 font-mono text-[10px] uppercase tracking-widest text-muted transition-colors hover:text-accent"
+                    >
+                      {t("logo_remove")}
+                    </button>
+                  )}
+                </div>
+              </div>
+              {logoError && (
+                <p className="mt-3 text-sm text-accent" role="alert">
+                  {logoError}
+                </p>
+              )}
+            </div>
           </div>
         </section>
       </div>

@@ -1,7 +1,7 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { SiteShell } from "@/components/SiteShell";
 import {
-  BELLUZZI_URL,
+  belluzziCampaignUrl,
   isLocale,
   localizedPath,
   REPOSITORY_URL,
@@ -231,7 +231,7 @@ export default async function HomePage({ params }: Props) {
                 {t("manifesto_text")}
               </p>
               <a
-                href={`${BELLUZZI_URL}/${locale}`}
+                href={belluzziCampaignUrl(locale, "home_manifesto")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-8 inline-flex items-center border-b border-accent pb-1 font-mono text-[11px] font-semibold uppercase tracking-widest text-accent transition-colors hover:text-accent-hover"
