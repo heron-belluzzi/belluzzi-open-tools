@@ -1,9 +1,9 @@
 # Belluzzi Open Tools
 
-Ferramentas gratuitas, open source e focadas em privacidade, mantidas pela
+Ferramentas gratuitas, open source e focadas em privacidade, mantidas pelo
 [Belluzzi](https://belluzzi.dev).
 
-O projeto preserva a identidade visual do site principal da Belluzzi e oferece
+O projeto preserva a identidade visual do site principal do Belluzzi e oferece
 temas claro e escuro, português do Brasil e inglês.
 
 ## Primeira versão

@@ -19,7 +19,7 @@
     "soon": "Em breve",
     "planned": "Planejado",
     "open_tool": "Abrir ferramenta",
-    "learn_more": "Conheça a Belluzzi"
+    "learn_more": "Conheça o Belluzzi"
   },
   "home": {
     "eyebrow": "Belluzzi Open Tools · gratuito e aberto",
@@ -47,7 +47,7 @@
     "data_description": "Formate e converta JSON, YAML e CSV sem enviar seus arquivos.",
     "manifesto_eyebrow": "Por que existe",
     "manifesto_title": "O produto é a demonstração.",
-    "manifesto_text": "Estas ferramentas são mantidas pela Belluzzi como software público de verdade: úteis na instância oficial, fáceis de hospedar e construídas com o mesmo cuidado aplicado a produtos de clientes.",
+    "manifesto_text": "Estas ferramentas são mantidas pelo Belluzzi como software público de verdade: úteis na instância oficial, fáceis de hospedar e construídas com o mesmo cuidado aplicado a produtos de clientes.",
     "manifesto_cta": "Precisa de um produto sob medida?"
   },
   "footer": {
