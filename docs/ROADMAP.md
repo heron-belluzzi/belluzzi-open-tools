@@ -21,8 +21,8 @@ Este documento acompanha o estado real do repositório e da instância oficial.
 - [x] Logotipo local em PNG, JPEG ou WebP.
 - [x] Validação básica de contraste.
 - [x] Exportação PNG e SVG sem envio do conteúdo ao servidor.
-- [x] Seleção automática PT/EN preparada para `qr.belluzzi.dev`.
-- [ ] Apontar o DNS e emitir TLS para `qr.belluzzi.dev`.
+- [x] Seleção automática PT/EN em `qr.belluzzi.dev`.
+- [x] DNS, vhost e TLS Let’s Encrypt com renovação automática para o alias.
 - [ ] Publicar o case correspondente em `belluzzi.dev`.
 
 ## Próximas ferramentas

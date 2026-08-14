@@ -54,14 +54,17 @@ O procedimento da instância oficial está em
 
 ## Domínio curto do QR Code
 
-Quando `qr.belluzzi.dev` estiver apontado e adicionado ao certificado do site,
-a aplicação selecionará o destino pelo idioma do navegador:
+O alias [`qr.belluzzi.dev`](https://qr.belluzzi.dev) seleciona o destino pelo
+idioma do navegador:
 
 - português: `https://tools.belluzzi.dev/pt/qr`;
 - inglês: `https://tools.belluzzi.dev/en/qr`.
 
 O redirecionamento negociado usa `307` e `Vary: Accept-Language`, preservando a
 query string e evitando fixar um idioma em caches compartilhados.
+
+O alias compartilha o site de `tools.belluzzi.dev` e utiliza certificado
+Let’s Encrypt com renovação automática administrada pelo CloudPanel.
 
 ## Privacidade
 

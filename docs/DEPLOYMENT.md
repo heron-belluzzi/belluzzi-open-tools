@@ -8,7 +8,7 @@ senhas, chaves privadas ou tokens.
 | Item | Valor |
 |---|---|
 | Domínio | `tools.belluzzi.dev` |
-| Alias preparado | `qr.belluzzi.dev` |
+| Alias ativo | `qr.belluzzi.dev` |
 | Tipo do site | Node.js |
 | Servidor | `34.138.211.55` |
 | SSH | Porta `22`, chave PuTTY da sessão `Augmentum` |
@@ -73,28 +73,37 @@ Externamente, verificar:
 - Tema claro/escuro, alternância de idioma e exportações do QR funcionam.
 - `robots.txt`, `sitemap.xml` e `/api/health` estão acessíveis.
 
-## Ativação futura de `qr.belluzzi.dev`
+## Alias `qr.belluzzi.dev`
 
-A aplicação já reconhece o host `qr.belluzzi.dev`. Quando o DNS for apontado:
-
-1. Crie o registro DNS do alias para a mesma infraestrutura de
-   `tools.belluzzi.dev`.
-2. Adicione `qr.belluzzi.dev` como domínio adicional do site no CloudPanel.
-3. Emita ou renove o certificado TLS incluindo o alias.
-4. Não crie redirecionamento fixo para português no Nginx: encaminhe o host para
-   a mesma aplicação na porta `3020`.
+O alias está ativo na mesma aplicação, sem segundo site ou processo. O vhost de
+`tools.belluzzi.dev` inclui os dois nomes no `server_name` e encaminha ambos
+para `127.0.0.1:3020`.
 
 Ao receber `/`, a aplicação lê `Accept-Language`, preserva a query string e
 responde com `307` para `/pt/qr` ou `/en/qr` no domínio canônico. A resposta
 inclui `Vary: Accept-Language` para não misturar idiomas em cache.
 
-Antes do DNS, o comportamento pode ser conferido na origem:
+O certificado Let’s Encrypt foi emitido com os SANs `tools.belluzzi.dev` e
+`qr.belluzzi.dev`. O CloudPanel verifica e renova os certificados diariamente
+pelo cron `/etc/cron.d/clp`:
+
+```text
+15 5 * * * clp /usr/bin/bash -c "/usr/bin/clpctl lets-encrypt:renew:certificates"
+```
+
+Comandos de verificação:
 
 ```bash
-curl -I http://127.0.0.1:3020/ \
-  -H 'Host: qr.belluzzi.dev' \
-  -H 'Accept-Language: en-US,en;q=0.9'
+openssl x509 \
+  -in /etc/nginx/ssl-certificates/tools.belluzzi.dev.crt \
+  -noout -issuer -dates -ext subjectAltName
+systemctl is-active cron
+clpctl lets-encrypt:renew:certificates
+nginx -t
 ```
+
+O backup anterior à inclusão do alias está em
+`/etc/nginx/sites-enabled/tools.belluzzi.dev.conf.pre-qr-20260814-135732`.
 
 ## Segredos
 
