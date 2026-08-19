@@ -56,7 +56,7 @@ By default, Docker Compose publishes the application at
 The official instance deployment procedure is documented in
 [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
 
-## Short QR Code domain
+## Short tool domains
 
 The [`qr.belluzzi.dev`](https://qr.belluzzi.dev) alias selects its destination
 according to the browser language:
@@ -68,13 +68,11 @@ Language negotiation uses a `307` redirect with `Vary: Accept-Language`,
 preserves the query string, and prevents shared caches from fixing one language
 for every visitor.
 
-The alias shares the `tools.belluzzi.dev` application and uses a Let’s Encrypt
-certificate with automatic renewal managed by CloudPanel.
+The [`pass.belluzzi.dev`](https://pass.belluzzi.dev) alias uses the same
+language negotiation and redirects to `/pt/pass` or `/en/pass`.
 
-The application is also ready to negotiate the browser language on
-`pass.belluzzi.dev` and redirect to `/pt/pass` or `/en/pass`. Activating this
-alias still requires DNS configuration and inclusion in the official
-instance's virtual host and TLS certificate.
+Both aliases share the `tools.belluzzi.dev` application and a single Let’s
+Encrypt certificate, with automatic renewal managed by CloudPanel.
 
 ## Privacy
 

@@ -33,9 +33,9 @@ Este documento acompanha o estado real do repositório e da instância oficial.
 - [x] Estimativa explicada de entropia e faixas de força.
 - [x] Geração e cópia locais, sem persistência ou chamadas de rede.
 - [x] Mobile, teclado, temas, PT/EN, testes unitários, E2E e acessibilidade.
-- [x] Roteamento preparado para seleção automática PT/EN em
+- [x] Seleção automática PT/EN ativa em
   `pass.belluzzi.dev`.
-- [ ] Ativar DNS, vhost e TLS para `pass.belluzzi.dev`.
+- [x] DNS, vhost e TLS Let’s Encrypt com renovação automática para o alias.
 - [ ] Publicar o case correspondente em `belluzzi.dev`.
 
 ## Próximas ferramentas

@@ -8,8 +8,7 @@ senhas, chaves privadas ou tokens.
 | Item | Valor |
 |---|---|
 | Domínio | `tools.belluzzi.dev` |
-| Alias ativo | `qr.belluzzi.dev` |
-| Alias preparado | `pass.belluzzi.dev` (DNS, vhost e TLS pendentes) |
+| Aliases ativos | `qr.belluzzi.dev`, `pass.belluzzi.dev` |
 | Tipo do site | Node.js |
 | Servidor | `34.138.211.55` |
 | SSH | Porta `22`, chave PuTTY da sessão `Augmentum` |
@@ -72,23 +71,26 @@ Externamente, verificar:
 - `/` redireciona para `/pt` ou `/en` conforme o idioma.
 - `/pt`, `/en`, `/pt/qr`, `/en/qr`, `/pt/pass` e `/en/pass` respondem via
   HTTPS.
+- `qr.belluzzi.dev` e `pass.belluzzi.dev` negociam PT/EN e redirecionam para o
+  domínio canônico preservando a query string.
 - Tema claro/escuro, alternância de idioma, exportações do QR e geração local
   de senhas/passphrases funcionam.
 - `robots.txt`, `sitemap.xml` e `/api/health` estão acessíveis.
 
-## Alias `qr.belluzzi.dev`
+## Aliases `qr.belluzzi.dev` e `pass.belluzzi.dev`
 
-O alias está ativo na mesma aplicação, sem segundo site ou processo. O vhost de
-`tools.belluzzi.dev` inclui os dois nomes no `server_name` e encaminha ambos
-para `127.0.0.1:3020`.
+Os aliases estão ativos na mesma aplicação, sem segundo site ou processo. O
+vhost de `tools.belluzzi.dev` inclui os três nomes no `server_name` e encaminha
+todos para `127.0.0.1:3020`.
 
 Ao receber `/`, a aplicação lê `Accept-Language`, preserva a query string e
-responde com `307` para `/pt/qr` ou `/en/qr` no domínio canônico. A resposta
-inclui `Vary: Accept-Language` para não misturar idiomas em cache.
+responde com `307` para a rota canônica correspondente: `/pt/qr` ou `/en/qr`
+para QR; `/pt/pass` ou `/en/pass` para Pass. A resposta inclui
+`Vary: Accept-Language` para não misturar idiomas em cache.
 
-O certificado Let’s Encrypt foi emitido com os SANs `tools.belluzzi.dev` e
-`qr.belluzzi.dev`. O CloudPanel verifica e renova os certificados diariamente
-pelo cron `/etc/cron.d/clp`:
+O certificado Let’s Encrypt foi emitido com os SANs `tools.belluzzi.dev`,
+`qr.belluzzi.dev` e `pass.belluzzi.dev`. O CloudPanel verifica e renova os
+certificados diariamente pelo cron `/etc/cron.d/clp`:
 
 ```text
 15 5 * * * clp /usr/bin/bash -c "/usr/bin/clpctl lets-encrypt:renew:certificates"
@@ -101,23 +103,18 @@ openssl x509 \
   -in /etc/nginx/ssl-certificates/tools.belluzzi.dev.crt \
   -noout -issuer -dates -ext subjectAltName
 systemctl is-active cron
-clpctl lets-encrypt:renew:certificates
+sudo -u clp /usr/bin/clpctl lets-encrypt:renew:certificates
 nginx -t
 ```
 
-O backup anterior à inclusão do alias está em
-`/etc/nginx/sites-enabled/tools.belluzzi.dev.conf.pre-qr-20260814-135732`.
+O comando de renovação examina diariamente todos os sites registrados no
+CloudPanel e reemite certificados Let’s Encrypt quando faltam até sete dias
+para vencer. A execução manual deve usar o mesmo usuário `clp` do cron.
 
-## Futuro alias `pass.belluzzi.dev`
+Os backups anteriores à inclusão dos aliases estão em:
 
-A aplicação já reconhece o host e responde com `307` para `/pt/pass` ou
-`/en/pass`, preservando a query string e variando por `Accept-Language`. Para
-ativá-lo publicamente ainda é necessário:
-
-1. apontar o DNS para o mesmo servidor;
-2. incluir `pass.belluzzi.dev` no `server_name` do vhost existente;
-3. reemitir o certificado Let’s Encrypt com o novo SAN;
-4. validar HTTP, HTTPS, idioma e renovação automática.
+- `/etc/nginx/sites-enabled/tools.belluzzi.dev.conf.pre-qr-20260814-135732`;
+- `/etc/nginx/sites-enabled/tools.belluzzi.dev.conf.pre-pass-20260819-160628`.
 
 ## Segredos
 
