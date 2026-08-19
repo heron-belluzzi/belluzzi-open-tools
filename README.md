@@ -74,11 +74,11 @@ for every visitor.
 The [`pass.belluzzi.dev`](https://pass.belluzzi.dev) alias uses the same
 language negotiation and redirects to `/pt/pass` or `/en/pass`.
 
-Both aliases share the `tools.belluzzi.dev` application and a single Let’s
-Encrypt certificate, with automatic renewal managed by CloudPanel.
+The [`utm.belluzzi.dev`](https://utm.belluzzi.dev) alias redirects to `/pt/utm`
+or `/en/utm` using the same language and query-string rules.
 
-The application is prepared for `utm.belluzzi.dev`; public activation still
-requires DNS, virtual host and TLS configuration.
+All three aliases share the `tools.belluzzi.dev` application and a single
+Let’s Encrypt certificate, with automatic renewal managed by CloudPanel.
 
 ## Privacy
 

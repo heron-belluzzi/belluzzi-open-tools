@@ -15,8 +15,8 @@ se integrar ao QR Code Studio sem enviar os dados ao servidor.
 - Presets embutidos; não há criação ou persistência de presets personalizados.
 - Não inclui encurtamento, redirecionamento, analytics ou validação da
   existência de números de telefone.
-- `utm.belluzzi.dev` fica preparado no código, mas sua ativação pública depende
-  de DNS, vhost e TLS.
+- `utm.belluzzi.dev` negocia PT/EN automaticamente e redireciona para a rota
+  canônica preservando a query string.
 
 ## UTM Builder
 

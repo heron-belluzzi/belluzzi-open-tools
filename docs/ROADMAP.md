@@ -49,7 +49,7 @@ Este documento acompanha o estado real do repositório e da instância oficial.
 - [x] Processamento local, mobile, teclado, temas, PT/EN e acessibilidade.
 - [x] Rotas `/pt/utm` e `/en/utm` e roteamento preparado para
   `utm.belluzzi.dev`.
-- [ ] Ativar DNS, vhost e TLS para `utm.belluzzi.dev`.
+- [x] DNS, vhost e TLS Let’s Encrypt com renovação automática para o alias.
 - [ ] Publicar o case correspondente em `belluzzi.dev`.
 
 A especificação está em [`docs/UTM-WHATSAPP.md`](UTM-WHATSAPP.md).
