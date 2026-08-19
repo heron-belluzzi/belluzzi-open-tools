@@ -41,7 +41,7 @@
     "qr_description": "Create QR codes for links, Wi-Fi, contacts, events, WhatsApp, email and text. Export PNG or SVG.",
     "pass_title": "Pass",
     "pass_description": "Secure passwords and passphrases generated entirely in your browser.",
-    "utm_title": "UTM Builder",
+    "utm_title": "UTM & WhatsApp",
     "utm_description": "Build campaign and WhatsApp links without improvised spreadsheets.",
     "data_title": "Data Toolkit",
     "data_description": "Format and convert JSON, YAML and CSV without uploading your files.",
@@ -189,6 +189,73 @@
     "errors": {
       "unavailable": "A secret could not be generated. Make sure your browser supports Web Crypto.",
       "copy": "Automatic copying failed. Select the result and copy it manually."
+    }
+  },
+  "utm": {
+    "meta_title": "UTM and WhatsApp link generator",
+    "meta_description": "Create campaign links with consistent UTMs and official WhatsApp links. Free, open source and processed in your browser.",
+    "eyebrow": "UTM & WhatsApp · local, consistent links",
+    "title": "Links ready to measure and share.",
+    "description": "Build campaigns and conversations without improvised spreadsheets. Validate, copy or turn the result into a QR code without sending data to the server.",
+    "back": "All tools",
+    "mode_label": "Link type",
+    "modes": {
+      "utm": "UTM campaign",
+      "whatsapp": "WhatsApp link"
+    },
+    "preset_label": "Source and medium presets",
+    "presets": {
+      "googleAds": "Google Ads",
+      "metaAds": "Meta Ads",
+      "instagramOrganic": "Instagram",
+      "newsletter": "Newsletter"
+    },
+    "fields": {
+      "destination": "Destination URL",
+      "destination_placeholder": "belluzzi.dev/services",
+      "source": "Source · utm_source",
+      "medium": "Medium · utm_medium",
+      "campaign": "Campaign · utm_campaign",
+      "campaign_placeholder": "august launch",
+      "content": "Content · utm_content (optional)",
+      "content_placeholder": "primary button",
+      "term": "Term · utm_term (optional)",
+      "term_placeholder": "custom software",
+      "phone": "Phone with country and area code",
+      "phone_placeholder": "+1 555 123 4567",
+      "message": "Initial message",
+      "message_placeholder": "Hello! I would like to learn more about the project."
+    },
+    "normalize": "Normalize UTMs to lowercase snake_case",
+    "message_count": "{count, plural, one {# character} other {# characters}}",
+    "phone_notice": "Validation confirms the international format only, not whether the number exists or who owns it.",
+    "result_title": "Generated link",
+    "result_hint": {
+      "utm": "Existing parameters and the URL fragment are preserved.",
+      "whatsapp": "The message is encoded to open correctly in WhatsApp."
+    },
+    "result_empty": "Complete the required fields to generate a link.",
+    "message_preview": "Message preview",
+    "long_url_warning": "This URL exceeds 2,000 characters and may not work in some channels.",
+    "copy": "Copy",
+    "copied": "Copied",
+    "open": "Open",
+    "to_qr": "Generate QR",
+    "clear": "Clear",
+    "privacy_title": "Everything happens in this browser",
+    "privacy_note": "Generation, validation and preview are local. We do not save the URL, phone number or message.",
+    "guidance_title": "Good practices",
+    "guidance": {
+      "utm": "Use consistent names across campaigns. Source identifies the platform, medium identifies the channel and campaign identifies the initiative.",
+      "whatsapp": "Enter the full number including country code. Review the message before publishing the link."
+    },
+    "qr_handoff_note": "When you choose Generate QR, the link is transferred once to QR Studio and removed from session storage.",
+    "errors": {
+      "destinationRequired": "Enter the destination URL.",
+      "destinationInvalid": "Use a valid HTTP or HTTPS URL.",
+      "campaignFieldsRequired": "Complete source, medium and campaign.",
+      "phoneInvalid": "Enter an international phone number with 8 to 15 digits.",
+      "copy": "Automatic copying failed. Select the link and copy it manually."
     }
   }
 }

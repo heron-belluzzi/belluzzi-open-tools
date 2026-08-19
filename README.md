@@ -17,6 +17,9 @@ supports light and dark themes, Brazilian Portuguese, and English.
 - Random password generator with configurable rules and Web Crypto.
 - Passphrase generator with Portuguese and English BIP39 wordlists.
 - Transparent entropy estimates, security guidance, and quick copying.
+- UTM campaign links with built-in presets and consistent naming.
+- Official WhatsApp links with phone normalization and message preview.
+- One-time, session-only handoff from campaign links to QR Code Studio.
 - Fully client-side processing with no persistence or transmission of tool
   content.
 
@@ -74,17 +77,21 @@ language negotiation and redirects to `/pt/pass` or `/en/pass`.
 Both aliases share the `tools.belluzzi.dev` application and a single Let’s
 Encrypt certificate, with automatic renewal managed by CloudPanel.
 
+The application is prepared for `utm.belluzzi.dev`; public activation still
+requires DNS, virtual host and TLS configuration.
+
 ## Privacy
 
-QR Code Studio and Pass do not send entered or generated content to an API. QR
-composition and cryptographic generation happen entirely in the browser. The
-public application requires no account and contains no third-party ads.
+QR Code Studio, Pass and the campaign link builders do not send entered or
+generated content to an API. QR composition, cryptographic generation and link
+assembly happen entirely in the browser. The public application requires no
+account and contains no third-party ads.
 
 ## Roadmap
 
 1. QR Code Studio — available.
 2. Password and passphrase generator — available.
-3. UTM and WhatsApp link builder.
+3. UTM and WhatsApp link builder — available.
 4. JSON, YAML, and CSV toolkit.
 5. Independent products such as SiteCheck and Hook.
 

@@ -18,6 +18,10 @@ import {
   contrastRatio,
   MIN_QR_CONTRAST,
 } from "@/lib/qr-design";
+import {
+  parseQrHandoff,
+  QR_HANDOFF_STORAGE_KEY,
+} from "@/lib/tool-handoff";
 
 type ContentType =
   | "url"
@@ -185,6 +189,20 @@ export default function QRStudio() {
     dataUrl: "",
     error: false,
   });
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      const stored = window.sessionStorage.getItem(QR_HANDOFF_STORAGE_KEY);
+      if (!stored) return;
+      window.sessionStorage.removeItem(QR_HANDOFF_STORAGE_KEY);
+      const payload = parseQrHandoff(stored);
+      if (!payload) return;
+      setContentType("url");
+      setForm((current) => ({ ...current, url: payload }));
+    }, 0);
+
+    return () => window.clearTimeout(timer);
+  }, []);
 
   const types: Array<{ value: ContentType; label: string }> = [
     { value: "url", label: t("types.url") },

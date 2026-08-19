@@ -67,8 +67,9 @@ export default async function HomePage({ params }: Props) {
       index: "03",
       title: t("utm_title"),
       description: t("utm_description"),
-      status: common("soon"),
-      available: false,
+      status: common("available"),
+      href: localizedPath(locale, "utm"),
+      available: true,
     },
     {
       key: "data",

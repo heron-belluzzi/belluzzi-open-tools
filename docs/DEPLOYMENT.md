@@ -69,8 +69,8 @@ pm2 logs belluzzi-open-tools --lines 50 --nostream
 Externamente, verificar:
 
 - `/` redireciona para `/pt` ou `/en` conforme o idioma.
-- `/pt`, `/en`, `/pt/qr`, `/en/qr`, `/pt/pass` e `/en/pass` respondem via
-  HTTPS.
+- `/pt`, `/en`, `/pt/qr`, `/en/qr`, `/pt/pass`, `/en/pass`, `/pt/utm` e
+  `/en/utm` respondem via HTTPS.
 - `qr.belluzzi.dev` e `pass.belluzzi.dev` negociam PT/EN e redirecionam para o
   domínio canônico preservando a query string.
 - Tema claro/escuro, alternância de idioma, exportações do QR e geração local
@@ -115,6 +115,13 @@ Os backups anteriores à inclusão dos aliases estão em:
 
 - `/etc/nginx/sites-enabled/tools.belluzzi.dev.conf.pre-qr-20260814-135732`;
 - `/etc/nginx/sites-enabled/tools.belluzzi.dev.conf.pre-pass-20260819-160628`.
+
+## Futuro alias `utm.belluzzi.dev`
+
+A aplicação já reconhece o host e responde com `307` para `/pt/utm` ou
+`/en/utm`, preservando a query string e variando por `Accept-Language`. Para
+ativá-lo publicamente ainda é necessário apontar o DNS, incluir o nome no vhost
+existente e reemitir o certificado Let’s Encrypt com o novo SAN.
 
 ## Segredos
 

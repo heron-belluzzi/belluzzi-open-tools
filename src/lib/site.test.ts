@@ -34,6 +34,7 @@ describe("aliasRouteForHost", () => {
   it("maps each tool subdomain to its canonical route", () => {
     expect(aliasRouteForHost("qr.belluzzi.dev")).toBe("qr");
     expect(aliasRouteForHost("PASS.BELLUZZI.DEV")).toBe("pass");
+    expect(aliasRouteForHost("utm.belluzzi.dev")).toBe("utm");
     expect(aliasRouteForHost("tools.belluzzi.dev")).toBeNull();
   });
 });

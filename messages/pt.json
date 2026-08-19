@@ -41,7 +41,7 @@
     "qr_description": "Crie QR Codes para links, Wi-Fi, contatos, eventos, WhatsApp, e-mail e texto. Exporte em PNG ou SVG.",
     "pass_title": "Pass",
     "pass_description": "Senhas e passphrases seguras, geradas inteiramente no navegador.",
-    "utm_title": "UTM Builder",
+    "utm_title": "UTM & WhatsApp",
     "utm_description": "Monte links de campanha e WhatsApp sem planilhas improvisadas.",
     "data_title": "Data Toolkit",
     "data_description": "Formate e converta JSON, YAML e CSV sem enviar seus arquivos.",
@@ -189,6 +189,73 @@
     "errors": {
       "unavailable": "Não foi possível gerar agora. Confirme se o navegador oferece suporte ao Web Crypto.",
       "copy": "Não foi possível copiar automaticamente. Selecione o resultado e copie manualmente."
+    }
+  },
+  "utm": {
+    "meta_title": "Gerador de links UTM e WhatsApp",
+    "meta_description": "Crie links de campanha com UTMs consistentes e links oficiais do WhatsApp. Gratuito, open source e processado no navegador.",
+    "eyebrow": "UTM & WhatsApp · links locais e consistentes",
+    "title": "Links prontos para medir e compartilhar.",
+    "description": "Monte campanhas e conversas sem planilhas improvisadas. Valide, copie ou transforme o resultado em QR Code sem enviar os dados ao servidor.",
+    "back": "Todas as ferramentas",
+    "mode_label": "Tipo de link",
+    "modes": {
+      "utm": "Campanha UTM",
+      "whatsapp": "Link do WhatsApp"
+    },
+    "preset_label": "Presets de origem e mídia",
+    "presets": {
+      "googleAds": "Google Ads",
+      "metaAds": "Meta Ads",
+      "instagramOrganic": "Instagram",
+      "newsletter": "Newsletter"
+    },
+    "fields": {
+      "destination": "URL de destino",
+      "destination_placeholder": "belluzzi.dev/servicos",
+      "source": "Origem · utm_source",
+      "medium": "Mídia · utm_medium",
+      "campaign": "Campanha · utm_campaign",
+      "campaign_placeholder": "lançamento agosto",
+      "content": "Conteúdo · utm_content (opcional)",
+      "content_placeholder": "botão principal",
+      "term": "Termo · utm_term (opcional)",
+      "term_placeholder": "software sob medida",
+      "phone": "Telefone com DDI e DDD",
+      "phone_placeholder": "+55 35 99999-0000",
+      "message": "Mensagem inicial",
+      "message_placeholder": "Olá! Gostaria de conhecer melhor o projeto."
+    },
+    "normalize": "Normalizar UTMs em minúsculas e snake_case",
+    "message_count": "{count, plural, one {# caractere} other {# caracteres}}",
+    "phone_notice": "A validação confirma apenas o formato internacional, não a existência ou propriedade do número.",
+    "result_title": "Link gerado",
+    "result_hint": {
+      "utm": "Os parâmetros existentes e o fragmento da URL são preservados.",
+      "whatsapp": "A mensagem é codificada para abrir corretamente no WhatsApp."
+    },
+    "result_empty": "Preencha os campos obrigatórios para gerar o link.",
+    "message_preview": "Prévia da mensagem",
+    "long_url_warning": "A URL ultrapassa 2.000 caracteres e pode não funcionar em alguns canais.",
+    "copy": "Copiar",
+    "copied": "Copiado",
+    "open": "Abrir",
+    "to_qr": "Gerar QR",
+    "clear": "Limpar",
+    "privacy_title": "Tudo acontece neste navegador",
+    "privacy_note": "A geração, validação e prévia são locais. Não salvamos a URL, o telefone ou a mensagem.",
+    "guidance_title": "Boas práticas",
+    "guidance": {
+      "utm": "Use nomes consistentes entre campanhas. Origem identifica a plataforma, mídia identifica o canal e campanha identifica a iniciativa.",
+      "whatsapp": "Informe o número completo com código do país. Revise a mensagem antes de divulgar o link publicamente."
+    },
+    "qr_handoff_note": "Ao escolher Gerar QR, o link é transferido uma única vez ao QR Studio e removido do armazenamento da sessão.",
+    "errors": {
+      "destinationRequired": "Informe a URL de destino.",
+      "destinationInvalid": "Use uma URL HTTP ou HTTPS válida.",
+      "campaignFieldsRequired": "Preencha origem, mídia e campanha.",
+      "phoneInvalid": "Informe um telefone internacional com 8 a 15 dígitos.",
+      "copy": "Não foi possível copiar automaticamente. Selecione o link e copie manualmente."
     }
   }
 }

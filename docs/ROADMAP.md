@@ -38,12 +38,27 @@ Este documento acompanha o estado real do repositório e da instância oficial.
 - [x] DNS, vhost e TLS Let’s Encrypt com renovação automática para o alias.
 - [ ] Publicar o case correspondente em `belluzzi.dev`.
 
+## UTM & WhatsApp Builder — terceira release
+
+- [x] UTMs com origem, mídia, campanha, conteúdo e termo.
+- [x] Presets para Google Ads, Meta Ads, Instagram e newsletter.
+- [x] Normalização opcional, preservação de query/fragmento e substituição sem
+  duplicatas.
+- [x] Links `wa.me` com telefone internacional, mensagem e prévia.
+- [x] Cópia, abertura, limpeza e handoff transitório para o QR Studio.
+- [x] Processamento local, mobile, teclado, temas, PT/EN e acessibilidade.
+- [x] Rotas `/pt/utm` e `/en/utm` e roteamento preparado para
+  `utm.belluzzi.dev`.
+- [ ] Ativar DNS, vhost e TLS para `utm.belluzzi.dev`.
+- [ ] Publicar o case correspondente em `belluzzi.dev`.
+
+A especificação está em [`docs/UTM-WHATSAPP.md`](UTM-WHATSAPP.md).
+
 ## Próximas ferramentas
 
-1. **UTM/WhatsApp Builder:** presets locais e integração com o QR Studio.
-2. **Data Toolkit:** JSON, YAML e CSV processados no navegador.
-3. **SiteCheck:** primeiro produto independente, em `check.belluzzi.dev`.
-4. **Hook:** inbox temporário e seguro para webhooks.
+1. **Data Toolkit:** JSON, YAML e CSV processados no navegador.
+2. **SiteCheck:** primeiro produto independente, em `check.belluzzi.dev`.
+3. **Hook:** inbox temporário e seguro para webhooks.
 
 ## Definição de pronto
 
