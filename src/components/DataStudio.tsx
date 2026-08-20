@@ -245,8 +245,8 @@ export default function DataStudio() {
                   onKeyDown={(event) => navigateTabs(event, index)}
                   className={`min-h-11 rounded-lg border px-3 py-2 font-mono text-[10px] uppercase tracking-widest transition-colors ${
                     mode === item.value
-                      ? "border-accent bg-accent text-white"
-                      : "border-border bg-bg text-muted hover:border-accent/60 hover:text-ink"
+                      ? "border-accent bg-accent text-bg"
+                      : "border-border bg-bg text-ink hover:border-accent/60"
                   }`}
                 >
                   {item.label}
@@ -446,4 +446,3 @@ export default function DataStudio() {
     </div>
   );
 }
-
