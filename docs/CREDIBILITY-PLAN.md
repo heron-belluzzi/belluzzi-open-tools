@@ -129,7 +129,8 @@ de logs. Não será um scanner invasivo de segurança.
 
 1. Implementar a seção Belluzzi Open Tools em `belluzzi.dev`.
 2. Melhorar a apresentação e os metadados do repositório no GitHub.
-3. Desenvolver e publicar o Data Toolkit como `v0.4.0` — concluído.
+3. Desenvolver o Data Toolkit como `v0.4.0` — concluído; publicação na
+   instância oficial pendente.
 4. Planejar o repositório e a arquitetura isolada do SiteCheck.
 5. Desenvolver o SiteCheck após fechar seus limites de segurança e operação.
 
