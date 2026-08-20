@@ -17,7 +17,8 @@ supports light and dark themes, Brazilian Portuguese, and English.
   <a href="https://tools.belluzzi.dev/en">Live toolkit</a> ·
   <a href="https://tools.belluzzi.dev/en/qr">QR Code Studio</a> ·
   <a href="https://tools.belluzzi.dev/en/pass">Pass</a> ·
-  <a href="https://tools.belluzzi.dev/en/utm">UTM &amp; WhatsApp</a>
+  <a href="https://tools.belluzzi.dev/en/utm">UTM &amp; WhatsApp</a> ·
+  <a href="https://tools.belluzzi.dev/en/data">Data Toolkit</a>
 </p>
 
 ## Product tour
@@ -45,6 +46,10 @@ supports light and dark themes, Brazilian Portuguese, and English.
 
 [![UTM and WhatsApp link builder showing a generated campaign URL](docs/screenshots/utm-whatsapp.png)](https://tools.belluzzi.dev/en/utm)
 
+### Data Toolkit
+
+[![Data Toolkit formatting and converting structured data locally](docs/screenshots/data-toolkit.png)](https://tools.belluzzi.dev/en/data)
+
 ## Available tools
 
 - Tool hub at `/pt` and `/en`.
@@ -59,6 +64,9 @@ supports light and dark themes, Brazilian Portuguese, and English.
 - UTM campaign links with built-in presets and consistent naming.
 - Official WhatsApp links with phone normalization and message preview.
 - One-time, session-only handoff from campaign links to QR Code Studio.
+- JSON formatting, validation, minification, and conversion to YAML or CSV.
+- Safe YAML-to-JSON parsing and CSV-to-JSON conversion with table preview.
+- Local file reading, copying, and downloads with a 1 MB safety limit.
 - Fully client-side processing with no persistence or transmission of tool
   content.
 
@@ -121,17 +129,18 @@ Let’s Encrypt certificate, with automatic renewal managed by CloudPanel.
 
 ## Privacy
 
-QR Code Studio, Pass and the campaign link builders do not send entered or
-generated content to an API. QR composition, cryptographic generation and link
-assembly happen entirely in the browser. The public application requires no
-account and contains no third-party ads.
+QR Code Studio, Pass, the campaign link builders and Data Toolkit do not send
+entered or generated content to an API. QR composition, cryptographic
+generation, link assembly, parsing and file conversion happen entirely in the
+browser. The public application requires no account and contains no third-party
+ads.
 
 ## Roadmap
 
 1. QR Code Studio — available.
 2. Password and passphrase generator — available.
 3. UTM and WhatsApp link builder — available.
-4. JSON, YAML, and CSV toolkit.
+4. JSON, YAML, and CSV toolkit — available.
 5. Independent products such as SiteCheck and Hook.
 
 ## License

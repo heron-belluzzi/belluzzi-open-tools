@@ -69,12 +69,12 @@ pm2 logs belluzzi-open-tools --lines 50 --nostream
 Externamente, verificar:
 
 - `/` redireciona para `/pt` ou `/en` conforme o idioma.
-- `/pt`, `/en`, `/pt/qr`, `/en/qr`, `/pt/pass`, `/en/pass`, `/pt/utm` e
-  `/en/utm` respondem via HTTPS.
+- `/pt`, `/en`, `/pt/qr`, `/en/qr`, `/pt/pass`, `/en/pass`, `/pt/utm`,
+  `/en/utm`, `/pt/data` e `/en/data` respondem via HTTPS.
 - `qr.belluzzi.dev`, `pass.belluzzi.dev` e `utm.belluzzi.dev` negociam PT/EN e
   redirecionam para o domínio canônico preservando a query string.
-- Tema claro/escuro, alternância de idioma, exportações do QR e geração local
-  de senhas/passphrases funcionam.
+- Tema claro/escuro, alternância de idioma, exportações do QR, geração local
+  de senhas/passphrases e conversões locais de dados funcionam.
 - `robots.txt`, `sitemap.xml` e `/api/health` estão acessíveis.
 
 ## Aliases curtos

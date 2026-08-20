@@ -19,8 +19,8 @@ conteúdo em PT-BR e inglês, temas claro/escuro, atalhos para as três ferramen
 central, GitHub e contato profissional. O README já apresenta capturas reais da
 central e das três ferramentas, badges verificáveis e links rápidos. A descrição
 e os tópicos do repositório também estão configurados. O social preview em
-1280×640 está preparado em `docs/social-preview.png`; restam o upload pela tela
-de configurações do GitHub e o destaque no perfil.
+1280×640 já foi enviado pela tela de configurações do GitHub; resta apenas
+destacar o repositório no perfil.
 
 ## Seção própria em `belluzzi.dev`
 
@@ -86,9 +86,9 @@ forte:
 As imagens devem representar o produto real, sem métricas inventadas, e ser
 comprimidas para não tornar o clone do repositório desnecessariamente pesado.
 
-## Próxima ferramenta: Data Toolkit
+## Quarta ferramenta: Data Toolkit
 
-O Data Toolkit continua sendo a quarta release do repositório principal.
+O Data Toolkit foi implementado como a quarta release do repositório principal.
 
 ### Escopo inicial
 
@@ -129,7 +129,7 @@ de logs. Não será um scanner invasivo de segurança.
 
 1. Implementar a seção Belluzzi Open Tools em `belluzzi.dev`.
 2. Melhorar a apresentação e os metadados do repositório no GitHub.
-3. Desenvolver e publicar o Data Toolkit como `v0.4.0`.
+3. Desenvolver e publicar o Data Toolkit como `v0.4.0` — concluído.
 4. Planejar o repositório e a arquitetura isolada do SiteCheck.
 5. Desenvolver o SiteCheck após fechar seus limites de segurança e operação.
 

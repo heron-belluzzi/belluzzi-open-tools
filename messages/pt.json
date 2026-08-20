@@ -257,5 +257,55 @@
       "phoneInvalid": "Informe um telefone internacional com 8 a 15 dígitos.",
       "copy": "Não foi possível copiar automaticamente. Selecione o link e copie manualmente."
     }
+  },
+  "data": {
+    "meta_title": "Formatador e conversor de JSON, YAML e CSV",
+    "meta_description": "Formate, valide e converta JSON, YAML e CSV localmente no navegador. Gratuito, open source e sem enviar seus dados.",
+    "eyebrow": "Data Toolkit · processamento local e privado",
+    "title": "Dados estruturados, sem atrito.",
+    "description": "Formate, valide, converta e visualize JSON, YAML ou CSV. Seus textos e arquivos permanecem neste navegador.",
+    "back": "Todas as ferramentas",
+    "format_label": "Formato de entrada",
+    "operation_label": "Operação",
+    "operations": {
+      "formatJson": "Formatar JSON",
+      "minifyJson": "Minificar JSON",
+      "jsonToYaml": "JSON para YAML",
+      "jsonToCsv": "JSON para CSV",
+      "yamlToJson": "YAML para JSON",
+      "csvToJson": "CSV para JSON"
+    },
+    "input_label": "Entrada",
+    "input_hint": "Cole um texto ou escolha um arquivo local.",
+    "size": "{current, number} / {limit, number} bytes",
+    "choose_file": "Escolher arquivo",
+    "load_sample": "Carregar exemplo",
+    "clear": "Limpar",
+    "process": "Processar localmente",
+    "output_label": "Resultado",
+    "output_empty": "Escolha uma operação e processe a entrada.",
+    "output_ready": "Resultado {format} pronto.",
+    "output_placeholder": "O resultado processado aparecerá aqui.",
+    "copy": "Copiar",
+    "copied": "Copiado",
+    "download": "Baixar",
+    "preview_title": "Prévia do CSV",
+    "preview_hint": "{rows, plural, one {# linha} other {# linhas}} · {columns, plural, one {# coluna} other {# colunas}}. A prévia exibe até 20 linhas e 12 colunas.",
+    "privacy_title": "Seus dados ficam neste dispositivo",
+    "privacy_note": "Leitura, conversão, prévia, cópia e download acontecem no navegador. A ferramenta não envia nem armazena a entrada.",
+    "safety_note": "As entradas são limitadas a 1 MB. Aliases YAML e tags personalizadas executáveis não são aceitos, reduzindo riscos de abuso de recursos ou parsing inseguro.",
+    "errors": {
+      "emptyInput": "Digite ou carregue algum conteúdo primeiro.",
+      "inputTooLarge": "A entrada ultrapassa o limite de segurança de 1 MB.",
+      "invalidJson": "O JSON é inválido.",
+      "invalidYaml": "O YAML é inválido ou usa aliases ou tags não suportadas.",
+      "invalidCsv": "O CSV é inválido ou possui linhas com quantidades diferentes de colunas.",
+      "duplicateHeaders": "Os nomes das colunas do CSV precisam ser únicos.",
+      "jsonNotTabular": "Para criar CSV, use um array JSON não vazio composto por objetos.",
+      "location": "Linha {line}, coluna {column}.",
+      "fileRead": "Não foi possível ler este arquivo.",
+      "copy": "Não foi possível copiar automaticamente. Selecione o resultado e copie manualmente.",
+      "unexpected": "Não foi possível processar o conteúdo."
+    }
   }
 }

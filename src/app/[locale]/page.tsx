@@ -76,8 +76,9 @@ export default async function HomePage({ params }: Props) {
       index: "04",
       title: t("data_title"),
       description: t("data_description"),
-      status: common("planned"),
-      available: false,
+      status: common("available"),
+      href: localizedPath(locale, "data"),
+      available: true,
     },
   ] as const;
 

@@ -70,7 +70,7 @@ A especificação está em [`docs/UTM-WHATSAPP.md`](UTM-WHATSAPP.md).
 - [x] Revisar descrição e tópicos do repositório no GitHub.
 - [x] Preparar o social preview em `docs/social-preview.png` no formato
   1280×640.
-- [ ] Enviar o social preview pela tela de configurações do GitHub.
+- [x] Enviar o social preview pela tela de configurações do GitHub.
 - [ ] Destacar o repositório no perfil do GitHub.
 
 O plano detalhado está em
@@ -78,12 +78,12 @@ O plano detalhado está em
 
 ## Data Toolkit — quarta release
 
-- [ ] Formatar, validar e minificar JSON.
-- [ ] Converter JSON e YAML com parsing seguro.
-- [ ] Visualizar CSV e converter CSV e JSON.
-- [ ] Copiar e baixar os resultados sem enviar dados ao servidor.
-- [ ] Adicionar limites seguros para arquivos e entradas grandes.
-- [ ] Publicar `/pt/data` e `/en/data` com PT/EN, temas, teclado e mobile.
+- [x] Formatar, validar e minificar JSON.
+- [x] Converter JSON e YAML com parsing seguro.
+- [x] Visualizar CSV e converter CSV e JSON.
+- [x] Copiar e baixar os resultados sem enviar dados ao servidor.
+- [x] Adicionar limites seguros para arquivos e entradas grandes.
+- [x] Publicar `/pt/data` e `/en/data` com PT/EN, temas, teclado e mobile.
 - [ ] Ativar `data.belluzzi.dev` somente depois da rota canônica estar pronta.
 
 ## SiteCheck — primeiro produto independente

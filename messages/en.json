@@ -257,5 +257,55 @@
       "phoneInvalid": "Enter an international phone number with 8 to 15 digits.",
       "copy": "Automatic copying failed. Select the link and copy it manually."
     }
+  },
+  "data": {
+    "meta_title": "JSON, YAML and CSV formatter and converter",
+    "meta_description": "Format, validate and convert JSON, YAML and CSV locally in your browser. Free, open source and without uploading your data.",
+    "eyebrow": "Data Toolkit · private, local processing",
+    "title": "Structured data, without the friction.",
+    "description": "Format, validate, convert and preview JSON, YAML or CSV. Your content and files stay in this browser.",
+    "back": "All tools",
+    "format_label": "Input format",
+    "operation_label": "Operation",
+    "operations": {
+      "formatJson": "Format JSON",
+      "minifyJson": "Minify JSON",
+      "jsonToYaml": "JSON to YAML",
+      "jsonToCsv": "JSON to CSV",
+      "yamlToJson": "YAML to JSON",
+      "csvToJson": "CSV to JSON"
+    },
+    "input_label": "Input",
+    "input_hint": "Paste text or choose a local file.",
+    "size": "{current, number} / {limit, number} bytes",
+    "choose_file": "Choose file",
+    "load_sample": "Load sample",
+    "clear": "Clear",
+    "process": "Process locally",
+    "output_label": "Result",
+    "output_empty": "Choose an operation and process the input.",
+    "output_ready": "{format} result ready.",
+    "output_placeholder": "The processed result will appear here.",
+    "copy": "Copy",
+    "copied": "Copied",
+    "download": "Download",
+    "preview_title": "CSV preview",
+    "preview_hint": "{rows, plural, one {# row} other {# rows}} · {columns, plural, one {# column} other {# columns}}. The preview displays up to 20 rows and 12 columns.",
+    "privacy_title": "Your data stays on this device",
+    "privacy_note": "Parsing, conversion, preview, copying and downloads run in your browser. The tool does not upload or store the input.",
+    "safety_note": "Inputs are limited to 1 MB. YAML aliases and executable custom tags are not accepted, reducing the risk of resource abuse or unsafe parsing.",
+    "errors": {
+      "emptyInput": "Enter or load some content first.",
+      "inputTooLarge": "The input exceeds the 1 MB safety limit.",
+      "invalidJson": "The JSON is invalid.",
+      "invalidYaml": "The YAML is invalid or uses unsupported aliases or tags.",
+      "invalidCsv": "The CSV is invalid or has rows with different column counts.",
+      "duplicateHeaders": "CSV column names must be unique.",
+      "jsonNotTabular": "To create CSV, use a non-empty JSON array of objects.",
+      "location": "Line {line}, column {column}.",
+      "fileRead": "This file could not be read.",
+      "copy": "Automatic copying failed. Select the result and copy it manually.",
+      "unexpected": "The content could not be processed."
+    }
   }
 }

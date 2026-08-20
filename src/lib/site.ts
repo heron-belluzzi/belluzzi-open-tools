@@ -11,6 +11,7 @@ export const routeSlugs = {
   qr: { pt: "qr", en: "qr" },
   pass: { pt: "pass", en: "pass" },
   utm: { pt: "utm", en: "utm" },
+  data: { pt: "data", en: "data" },
 } as const;
 
 export type RouteKey = keyof typeof routeSlugs;
