@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { Fraunces, Inter, JetBrains_Mono } from "next/font/google";
-import GoogleAnalyticsConsent from "@/components/GoogleAnalyticsConsent";
 import { routing } from "@/i18n/config";
 import { GOOGLE_ANALYTICS_ID } from "@/lib/analytics";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
@@ -102,7 +102,7 @@ export default async function LocaleLayout({ children, params }: Props) {
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ThemeProvider>{children}</ThemeProvider>
         </NextIntlClientProvider>
-        <GoogleAnalyticsConsent gaId={GOOGLE_ANALYTICS_ID} locale={locale} />
+        <GoogleAnalytics gaId={GOOGLE_ANALYTICS_ID} />
       </body>
     </html>
   );

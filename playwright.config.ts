@@ -8,20 +8,6 @@ export default defineConfig({
   reporter: process.env.CI ? "github" : "list",
   use: {
     baseURL: "http://127.0.0.1:3000",
-    storageState: {
-      cookies: [],
-      origins: [
-        {
-          origin: "http://127.0.0.1:3000",
-          localStorage: [
-            {
-              name: "belluzzi:analytics-consent:v1",
-              value: "denied",
-            },
-          ],
-        },
-      ],
-    },
     trace: "on-first-retry",
   },
   projects: [
