@@ -12,6 +12,13 @@ deve demonstrar capacidade técnica, cuidado com privacidade e consistência de
 produto, conduzindo quem tiver interesse para a instância pública, o GitHub e o
 contato profissional.
 
+## Estado atual
+
+A seção unificada foi publicada em `belluzzi.dev` em 20 de agosto de 2026, com
+conteúdo em PT-BR e inglês, temas claro/escuro, atalhos para as três ferramentas,
+central, GitHub e contato profissional. A apresentação do repositório no GitHub
+é a próxima etapa deste plano.
+
 ## Seção própria em `belluzzi.dev`
 
 ### Decisão de produto

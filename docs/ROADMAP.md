@@ -23,7 +23,8 @@ Este documento acompanha o estado real do repositório e da instância oficial.
 - [x] Exportação PNG e SVG sem envio do conteúdo ao servidor.
 - [x] Seleção automática PT/EN em `qr.belluzzi.dev`.
 - [x] DNS, vhost e TLS Let’s Encrypt com renovação automática para o alias.
-- [ ] Publicar o case correspondente em `belluzzi.dev`.
+- [x] Incluir o atalho na seção unificada `Belluzzi Open Tools` em
+  `belluzzi.dev`.
 
 ## Pass — segunda release
 
@@ -36,7 +37,8 @@ Este documento acompanha o estado real do repositório e da instância oficial.
 - [x] Seleção automática PT/EN ativa em
   `pass.belluzzi.dev`.
 - [x] DNS, vhost e TLS Let’s Encrypt com renovação automática para o alias.
-- [ ] Publicar o case correspondente em `belluzzi.dev`.
+- [x] Incluir o atalho na seção unificada `Belluzzi Open Tools` em
+  `belluzzi.dev`.
 
 ## UTM & WhatsApp Builder — terceira release
 
@@ -50,18 +52,19 @@ Este documento acompanha o estado real do repositório e da instância oficial.
 - [x] Rotas `/pt/utm` e `/en/utm` e roteamento preparado para
   `utm.belluzzi.dev`.
 - [x] DNS, vhost e TLS Let’s Encrypt com renovação automática para o alias.
-- [ ] Publicar o case correspondente em `belluzzi.dev`.
+- [x] Incluir o atalho na seção unificada `Belluzzi Open Tools` em
+  `belluzzi.dev`.
 
 A especificação está em [`docs/UTM-WHATSAPP.md`](UTM-WHATSAPP.md).
 
 ## Credibilidade e descoberta
 
-- [ ] Criar uma seção própria `Belluzzi Open Tools` na home de `belluzzi.dev`,
+- [x] Criar uma seção própria `Belluzzi Open Tools` na home de `belluzzi.dev`,
   separada dos projetos do portfólio.
-- [ ] Apresentar a iniciativa em um único painel com atalhos compactos para as
+- [x] Apresentar a iniciativa em um único painel com atalhos compactos para as
   ferramentas já publicadas.
-- [ ] Adicionar CTAs para a central, o GitHub e o contato profissional.
-- [ ] Validar a seção em PT-BR, inglês, temas, teclado e mobile.
+- [x] Adicionar CTAs para a central, o GitHub e o contato profissional.
+- [x] Validar a seção em PT-BR, inglês, temas, teclado e mobile.
 - [ ] Adicionar screenshots reais, badges e links rápidos ao README.
 - [ ] Revisar descrição, tópicos e social preview do repositório no GitHub.
 - [ ] Destacar o repositório no perfil do GitHub.
