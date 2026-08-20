@@ -84,7 +84,7 @@ O plano detalhado está em
 - [x] Copiar e baixar os resultados sem enviar dados ao servidor.
 - [x] Adicionar limites seguros para arquivos e entradas grandes.
 - [x] Implementar `/pt/data` e `/en/data` com PT/EN, temas, teclado e mobile.
-- [ ] Publicar a release `v0.4.0` na instância oficial.
+- [x] Publicar a release `v0.4.0` na instância oficial.
 - [ ] Ativar `data.belluzzi.dev` somente depois da rota canônica estar pronta.
 
 ## SiteCheck — primeiro produto independente
