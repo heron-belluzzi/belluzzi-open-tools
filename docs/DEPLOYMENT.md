@@ -8,7 +8,7 @@ senhas, chaves privadas ou tokens.
 | Item | Valor |
 |---|---|
 | Domínio | `tools.belluzzi.dev` |
-| Aliases ativos | `qr.belluzzi.dev`, `pass.belluzzi.dev`, `utm.belluzzi.dev`, `data.belluzzi.dev` |
+| Aliases ativos | `qr.belluzzi.dev`, `pass.belluzzi.dev`, `utm.belluzzi.dev`, `data.belluzzi.dev`, `check.belluzzi.dev` |
 | Tipo do site | Node.js |
 | Servidor | `34.138.211.55` |
 | SSH | Porta `22`, chave PuTTY da sessão `Augmentum` |
@@ -70,25 +70,22 @@ Externamente, verificar:
 
 - `/` redireciona para `/pt` ou `/en` conforme o idioma.
 - `/pt`, `/en`, `/pt/qr`, `/en/qr`, `/pt/pass`, `/en/pass`, `/pt/utm`,
-  `/en/utm`, `/pt/data` e `/en/data` respondem via HTTPS.
+  `/en/utm`, `/pt/data`, `/en/data`, `/pt/check` e `/en/check` respondem via
+  HTTPS.
 - `qr.belluzzi.dev`, `pass.belluzzi.dev`, `utm.belluzzi.dev` e
-  `data.belluzzi.dev` negociam PT/EN e redirecionam para o domínio canônico
-  preservando a query string.
+  `data.belluzzi.dev` e `check.belluzzi.dev` negociam PT/EN e redirecionam para
+  o domínio canônico preservando a query string.
 - Tema claro/escuro, alternância de idioma, exportações do QR, geração local
   de senhas/passphrases e conversões locais de dados funcionam.
 - `robots.txt`, `sitemap.xml` e `/api/health` estão acessíveis.
 
 ## Ativação do SiteCheck
 
-A rota canônica `/pt/check` e `/en/check` deve ser publicada e validada antes
-do alias. Depois:
-
-1. criar o registro DNS proxied de `check.belluzzi.dev` para o mesmo servidor;
-2. adicionar o nome ao `server_name` do vhost existente;
-3. reemitir o certificado de `tools.belluzzi.dev` incluindo o novo SAN;
-4. configurar na Cloudflare a regra de rate limiting para `/api/site-check`;
-5. validar o redirect `307` por idioma, bloqueio de redes privadas e renovação
-   automática do certificado.
+As rotas canônicas `/pt/check` e `/en/check`, o DNS proxied, o alias no vhost e
+o SAN de `check.belluzzi.dev` estão ativos. O redirect `307` por idioma, a
+proteção contra redes privadas e a renovação automática do certificado foram
+validados. A regra externa de rate limiting na Cloudflare continua como uma
+camada adicional pendente; a aplicação já aplica seus próprios limites.
 
 O alias não cria outro site, porta ou processo. Ele encaminha para `3020` e a
 aplicação redireciona para `/pt/check` ou `/en/check`.
@@ -96,7 +93,7 @@ aplicação redireciona para `/pt/check` ou `/en/check`.
 ## Aliases curtos
 
 Os aliases estão ativos na mesma aplicação, sem segundo site ou processo. O
-vhost de `tools.belluzzi.dev` inclui os cinco nomes no `server_name` e
+vhost de `tools.belluzzi.dev` inclui os seis nomes no `server_name` e
 encaminha todos para `127.0.0.1:3020`.
 
 Ao receber `/`, a aplicação lê `Accept-Language`, preserva a query string e
@@ -105,11 +102,12 @@ para QR; `/pt/pass` ou `/en/pass` para Pass. A resposta inclui
 `Vary: Accept-Language` para não misturar idiomas em cache. O alias UTM segue
 a mesma regra e aponta para `/pt/utm` ou `/en/utm`.
 O alias Data aponta para `/pt/data` ou `/en/data`.
+O alias SiteCheck aponta para `/pt/check` ou `/en/check`.
 
 O certificado Let’s Encrypt foi emitido com os SANs `tools.belluzzi.dev`,
 `qr.belluzzi.dev`, `pass.belluzzi.dev`, `utm.belluzzi.dev` e
-`data.belluzzi.dev`. O CloudPanel verifica e renova os certificados diariamente
-pelo cron `/etc/cron.d/clp`:
+`data.belluzzi.dev` e `check.belluzzi.dev`. O CloudPanel verifica e renova os
+certificados diariamente pelo cron `/etc/cron.d/clp`:
 
 ```text
 15 5 * * * clp /usr/bin/bash -c "/usr/bin/clpctl lets-encrypt:renew:certificates"
@@ -135,7 +133,8 @@ Os backups anteriores à inclusão dos aliases estão em:
 - `/etc/nginx/sites-enabled/tools.belluzzi.dev.conf.pre-qr-20260814-135732`;
 - `/etc/nginx/sites-enabled/tools.belluzzi.dev.conf.pre-pass-20260819-160628`;
 - `/etc/nginx/sites-enabled/tools.belluzzi.dev.conf.pre-utm-20260819-170102`;
-- `/var/backups/tools.belluzzi.dev.conf.pre-data-20260820T1815Z`.
+- `/var/backups/tools.belluzzi.dev.conf.pre-data-20260820T1815Z`;
+- `/var/backups/tools.belluzzi.dev.conf.pre-check-20260820T2018Z`.
 
 ## Segredos
 

@@ -85,7 +85,7 @@ O plano detalhado está em
 - [x] Adicionar limites seguros para arquivos e entradas grandes.
 - [x] Implementar `/pt/data` e `/en/data` com PT/EN, temas, teclado e mobile.
 - [x] Publicar a release `v0.4.0` na instância oficial.
-- [ ] Ativar `data.belluzzi.dev` somente depois da rota canônica estar pronta.
+- [x] Ativar `data.belluzzi.dev` somente depois da rota canônica estar pronta.
 
 ## SiteCheck — quinta release
 
@@ -95,8 +95,9 @@ O plano detalhado está em
   resposta antes de implementar o backend.
 - [x] Implementar uma análise acionável em PT-BR e inglês, sem persistência.
 - [x] Publicar a release `v0.5.0` na instância oficial.
-- [ ] Ativar `check.belluzzi.dev`, TLS e rate limiting na Cloudflare após a
-  rota canônica estar validada.
+- [x] Ativar `check.belluzzi.dev` e TLS após validar a rota canônica.
+- [ ] Adicionar uma camada externa de rate limiting na Cloudflare para
+  `/api/site-check`.
 
 ## Produtos posteriores
 

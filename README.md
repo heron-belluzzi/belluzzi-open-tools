@@ -130,8 +130,8 @@ or `/en/utm` using the same language and query-string rules.
 The [`data.belluzzi.dev`](https://data.belluzzi.dev) alias redirects to
 `/pt/data` or `/en/data` using the same negotiation rules.
 
-After DNS and TLS activation, `check.belluzzi.dev` follows the same negotiation
-and redirects to `/pt/check` or `/en/check`.
+The [`check.belluzzi.dev`](https://check.belluzzi.dev) alias follows the same
+negotiation and redirects to `/pt/check` or `/en/check`.
 
 All aliases share the `tools.belluzzi.dev` application and a single
 Let’s Encrypt certificate, with automatic renewal managed by CloudPanel.
