@@ -94,7 +94,7 @@ O plano detalhado está em
 - [x] Projetar proteção contra SSRF, rate limiting, timeouts e limites de
   resposta antes de implementar o backend.
 - [x] Implementar uma análise acionável em PT-BR e inglês, sem persistência.
-- [ ] Publicar a release `v0.5.0` na instância oficial.
+- [x] Publicar a release `v0.5.0` na instância oficial.
 - [ ] Ativar `check.belluzzi.dev`, TLS e rate limiting na Cloudflare após a
   rota canônica estar validada.
 
