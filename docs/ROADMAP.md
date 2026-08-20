@@ -65,7 +65,8 @@ A especificação está em [`docs/UTM-WHATSAPP.md`](UTM-WHATSAPP.md).
   ferramentas já publicadas.
 - [x] Adicionar CTAs para a central, o GitHub e o contato profissional.
 - [x] Validar a seção em PT-BR, inglês, temas, teclado e mobile.
-- [ ] Adicionar screenshots reais, badges e links rápidos ao README.
+- [x] Adicionar screenshots reais e links rápidos ao README.
+- [ ] Adicionar badges de CI, release, licença e instância pública ao README.
 - [ ] Revisar descrição, tópicos e social preview do repositório no GitHub.
 - [ ] Destacar o repositório no perfil do GitHub.
 

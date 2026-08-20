@@ -6,6 +6,40 @@ Free, open source, privacy-first tools maintained by
 The project follows the visual identity of the main Belluzzi website and
 supports light and dark themes, Brazilian Portuguese, and English.
 
+[![Belluzzi Open Tools live toolkit](docs/screenshots/overview.png)](https://tools.belluzzi.dev/en)
+
+<p align="center">
+  <a href="https://tools.belluzzi.dev/en">Live toolkit</a> ·
+  <a href="https://tools.belluzzi.dev/en/qr">QR Code Studio</a> ·
+  <a href="https://tools.belluzzi.dev/en/pass">Pass</a> ·
+  <a href="https://tools.belluzzi.dev/en/utm">UTM &amp; WhatsApp</a>
+</p>
+
+## Product tour
+
+<table>
+  <tr>
+    <th width="50%">QR Code Studio</th>
+    <th width="50%">Pass</th>
+  </tr>
+  <tr>
+    <td>
+      <a href="https://tools.belluzzi.dev/en/qr">
+        <img src="docs/screenshots/qr-studio.png" alt="QR Code Studio showing content options and a live QR preview">
+      </a>
+    </td>
+    <td>
+      <a href="https://tools.belluzzi.dev/en/pass">
+        <img src="docs/screenshots/pass.png" alt="Pass showing a locally generated password and its estimated entropy">
+      </a>
+    </td>
+  </tr>
+</table>
+
+### UTM & WhatsApp
+
+[![UTM and WhatsApp link builder showing a generated campaign URL](docs/screenshots/utm-whatsapp.png)](https://tools.belluzzi.dev/en/utm)
+
 ## Available tools
 
 - Tool hub at `/pt` and `/en`.
