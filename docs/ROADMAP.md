@@ -54,11 +54,42 @@ Este documento acompanha o estado real do repositório e da instância oficial.
 
 A especificação está em [`docs/UTM-WHATSAPP.md`](UTM-WHATSAPP.md).
 
-## Próximas ferramentas
+## Credibilidade e descoberta
 
-1. **Data Toolkit:** JSON, YAML e CSV processados no navegador.
-2. **SiteCheck:** primeiro produto independente, em `check.belluzzi.dev`.
-3. **Hook:** inbox temporário e seguro para webhooks.
+- [ ] Criar uma seção própria `Belluzzi Open Tools` na home de `belluzzi.dev`,
+  separada dos projetos do portfólio.
+- [ ] Apresentar a iniciativa em um único painel com atalhos compactos para as
+  ferramentas já publicadas.
+- [ ] Adicionar CTAs para a central, o GitHub e o contato profissional.
+- [ ] Validar a seção em PT-BR, inglês, temas, teclado e mobile.
+- [ ] Adicionar screenshots reais, badges e links rápidos ao README.
+- [ ] Revisar descrição, tópicos e social preview do repositório no GitHub.
+- [ ] Destacar o repositório no perfil do GitHub.
+
+O plano detalhado está em
+[`docs/CREDIBILITY-PLAN.md`](CREDIBILITY-PLAN.md).
+
+## Data Toolkit — quarta release
+
+- [ ] Formatar, validar e minificar JSON.
+- [ ] Converter JSON e YAML com parsing seguro.
+- [ ] Visualizar CSV e converter CSV e JSON.
+- [ ] Copiar e baixar os resultados sem enviar dados ao servidor.
+- [ ] Adicionar limites seguros para arquivos e entradas grandes.
+- [ ] Publicar `/pt/data` e `/en/data` com PT/EN, temas, teclado e mobile.
+- [ ] Ativar `data.belluzzi.dev` somente depois da rota canônica estar pronta.
+
+## SiteCheck — primeiro produto independente
+
+- [ ] Definir arquitetura e repositório próprios para `check.belluzzi.dev`.
+- [ ] Verificar HTTP, redirecionamentos, TLS, headers, SEO, robots e sitemap.
+- [ ] Projetar proteção contra SSRF, rate limiting, timeouts e limites de
+  resposta antes de implementar o backend.
+- [ ] Publicar uma análise acionável em PT-BR e inglês.
+
+## Produtos posteriores
+
+1. **Hook:** inbox temporário e seguro para webhooks.
 
 ## Definição de pronto
 
