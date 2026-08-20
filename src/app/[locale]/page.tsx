@@ -34,6 +34,11 @@ const icons = {
       <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 3.75 3.75 12l4.5 8.25M15.75 3.75 20.25 12l-4.5 8.25M13.5 4.5l-3 15" />
     </svg>
   ),
+  check: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.4} aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6.75h3m-6 3h9m-10.5 9h12A2.25 2.25 0 0 0 20.25 16.5V6A2.25 2.25 0 0 0 18 3.75H6A2.25 2.25 0 0 0 3.75 6v10.5A2.25 2.25 0 0 0 6 18.75Zm2.25-5.25 1.5 1.5 3-3" />
+    </svg>
+  ),
 };
 
 export default async function HomePage({ params }: Props) {
@@ -78,6 +83,15 @@ export default async function HomePage({ params }: Props) {
       description: t("data_description"),
       status: common("available"),
       href: localizedPath(locale, "data"),
+      available: true,
+    },
+    {
+      key: "check",
+      index: "05",
+      title: t("check_title"),
+      description: t("check_description"),
+      status: common("available"),
+      href: localizedPath(locale, "check"),
       available: true,
     },
   ] as const;

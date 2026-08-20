@@ -12,6 +12,7 @@ export const routeSlugs = {
   pass: { pt: "pass", en: "pass" },
   utm: { pt: "utm", en: "utm" },
   data: { pt: "data", en: "data" },
+  check: { pt: "check", en: "check" },
 } as const;
 
 export type RouteKey = keyof typeof routeSlugs;
@@ -21,6 +22,7 @@ export const TOOL_ALIAS_ROUTES: Partial<Record<string, RouteKey>> = {
   "pass.belluzzi.dev": "pass",
   "utm.belluzzi.dev": "utm",
   "data.belluzzi.dev": "data",
+  "check.belluzzi.dev": "check",
 };
 
 export function aliasRouteForHost(hostname: string) {

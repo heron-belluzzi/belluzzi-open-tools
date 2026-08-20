@@ -18,7 +18,8 @@ supports light and dark themes, Brazilian Portuguese, and English.
   <a href="https://tools.belluzzi.dev/en/qr">QR Code Studio</a> ·
   <a href="https://tools.belluzzi.dev/en/pass">Pass</a> ·
   <a href="https://tools.belluzzi.dev/en/utm">UTM &amp; WhatsApp</a> ·
-  <a href="https://tools.belluzzi.dev/en/data">Data Toolkit</a>
+  <a href="https://tools.belluzzi.dev/en/data">Data Toolkit</a> ·
+  <a href="https://tools.belluzzi.dev/en/check">SiteCheck</a>
 </p>
 
 ## Product tour
@@ -67,6 +68,8 @@ supports light and dark themes, Brazilian Portuguese, and English.
 - JSON formatting, validation, minification, and conversion to YAML or CSV.
 - Safe YAML-to-JSON parsing and CSV-to-JSON conversion with table preview.
 - Local file reading, copying, and downloads with a 1 MB safety limit.
+- Actionable HTTP, TLS, security header, SEO, robots.txt, and sitemap.xml
+  diagnostics with strict SSRF and resource-abuse protection.
 - Fully client-side processing with no persistence or transmission of tool
   content.
 
@@ -127,7 +130,10 @@ or `/en/utm` using the same language and query-string rules.
 The [`data.belluzzi.dev`](https://data.belluzzi.dev) alias redirects to
 `/pt/data` or `/en/data` using the same negotiation rules.
 
-All four aliases share the `tools.belluzzi.dev` application and a single
+After DNS and TLS activation, `check.belluzzi.dev` follows the same negotiation
+and redirects to `/pt/check` or `/en/check`.
+
+All aliases share the `tools.belluzzi.dev` application and a single
 Let’s Encrypt certificate, with automatic renewal managed by CloudPanel.
 
 ## Privacy
@@ -136,7 +142,8 @@ QR Code Studio, Pass, the campaign link builders and Data Toolkit do not send
 entered or generated content to an API. QR composition, cryptographic
 generation, link assembly, parsing and file conversion happen entirely in the
 browser. The public application requires no account and contains no third-party
-ads.
+ads. SiteCheck sends only the submitted public URL to the application server
+for the duration of one analysis; it creates no history or public report link.
 
 ## Roadmap
 
@@ -144,7 +151,8 @@ ads.
 2. Password and passphrase generator — available.
 3. UTM and WhatsApp link builder — available.
 4. JSON, YAML, and CSV toolkit — available.
-5. Independent products such as SiteCheck and Hook.
+5. SiteCheck for HTTP, TLS, security headers, SEO and indexing — available.
+6. Later products such as Hook.
 
 ## License
 

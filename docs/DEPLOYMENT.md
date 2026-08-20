@@ -78,6 +78,21 @@ Externamente, verificar:
   de senhas/passphrases e conversões locais de dados funcionam.
 - `robots.txt`, `sitemap.xml` e `/api/health` estão acessíveis.
 
+## Ativação do SiteCheck
+
+A rota canônica `/pt/check` e `/en/check` deve ser publicada e validada antes
+do alias. Depois:
+
+1. criar o registro DNS proxied de `check.belluzzi.dev` para o mesmo servidor;
+2. adicionar o nome ao `server_name` do vhost existente;
+3. reemitir o certificado de `tools.belluzzi.dev` incluindo o novo SAN;
+4. configurar na Cloudflare a regra de rate limiting para `/api/site-check`;
+5. validar o redirect `307` por idioma, bloqueio de redes privadas e renovação
+   automática do certificado.
+
+O alias não cria outro site, porta ou processo. Ele encaminha para `3020` e a
+aplicação redireciona para `/pt/check` ou `/en/check`.
+
 ## Aliases curtos
 
 Os aliases estão ativos na mesma aplicação, sem segundo site ou processo. O

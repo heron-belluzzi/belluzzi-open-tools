@@ -87,13 +87,16 @@ O plano detalhado está em
 - [x] Publicar a release `v0.4.0` na instância oficial.
 - [ ] Ativar `data.belluzzi.dev` somente depois da rota canônica estar pronta.
 
-## SiteCheck — primeiro produto independente
+## SiteCheck — quinta release
 
-- [ ] Definir arquitetura e repositório próprios para `check.belluzzi.dev`.
-- [ ] Verificar HTTP, redirecionamentos, TLS, headers, SEO, robots e sitemap.
-- [ ] Projetar proteção contra SSRF, rate limiting, timeouts e limites de
+- [x] Manter o produto no mesmo repositório, aplicação e processo PM2.
+- [x] Verificar HTTP, redirecionamentos, TLS, headers, SEO, robots e sitemap.
+- [x] Projetar proteção contra SSRF, rate limiting, timeouts e limites de
   resposta antes de implementar o backend.
-- [ ] Publicar uma análise acionável em PT-BR e inglês.
+- [x] Implementar uma análise acionável em PT-BR e inglês, sem persistência.
+- [ ] Publicar a release `v0.5.0` na instância oficial.
+- [ ] Ativar `check.belluzzi.dev`, TLS e rate limiting na Cloudflare após a
+  rota canônica estar validada.
 
 ## Produtos posteriores
 

@@ -106,3 +106,27 @@ a {
     transition-duration: 0.01ms !important;
   }
 }
+
+@media print {
+  nav,
+  footer,
+  .sitecheck-print-hidden {
+    display: none !important;
+  }
+
+  html,
+  body {
+    background: white !important;
+    color: #16161a !important;
+  }
+
+  .sitecheck-report {
+    color: #16161a;
+  }
+
+  .sitecheck-report section,
+  .sitecheck-report header {
+    break-inside: avoid;
+    box-shadow: none !important;
+  }
+}

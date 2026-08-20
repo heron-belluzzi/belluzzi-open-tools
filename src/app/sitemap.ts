@@ -7,7 +7,7 @@ import {
   type RouteKey,
 } from "@/lib/site";
 
-const routes: RouteKey[] = ["home", "qr", "pass", "utm", "data"];
+const routes: RouteKey[] = ["home", "qr", "pass", "utm", "data", "check"];
 const locales: Locale[] = ["pt", "en"];
 
 export default function sitemap(): MetadataRoute.Sitemap {

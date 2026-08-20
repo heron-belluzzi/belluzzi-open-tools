@@ -108,8 +108,10 @@ de tamanho.
 
 ## Produto seguinte: SiteCheck
 
-O SiteCheck continua planejado como o primeiro produto independente, em
-`check.belluzzi.dev`, com backend e repositório próprios.
+O SiteCheck é a quinta release do `belluzzi-open-tools`, em
+`check.belluzzi.dev`, usando o mesmo aplicativo e processo PM2. O isolamento de
+risco fica no cliente HTTP seguro, nos limites de concorrência e no rate
+limiting da aplicação e da Cloudflare.
 
 ### Escopo inicial
 
@@ -130,8 +132,8 @@ de logs. Não será um scanner invasivo de segurança.
 1. Implementar a seção Belluzzi Open Tools em `belluzzi.dev`.
 2. Melhorar a apresentação e os metadados do repositório no GitHub.
 3. Desenvolver e publicar o Data Toolkit como `v0.4.0` — concluído.
-4. Planejar o repositório e a arquitetura isolada do SiteCheck.
-5. Desenvolver o SiteCheck após fechar seus limites de segurança e operação.
+4. Definir a arquitetura segura do SiteCheck — concluído.
+5. Desenvolver e publicar o SiteCheck como `v0.5.0`.
 
 ## Definição de pronto da camada de credibilidade
 
