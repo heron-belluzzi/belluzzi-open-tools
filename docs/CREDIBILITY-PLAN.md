@@ -17,8 +17,10 @@ contato profissional.
 A seção unificada foi publicada em `belluzzi.dev` em 20 de agosto de 2026, com
 conteúdo em PT-BR e inglês, temas claro/escuro, atalhos para as três ferramentas,
 central, GitHub e contato profissional. O README já apresenta capturas reais da
-central e das três ferramentas; badges e metadados do repositório são a próxima
-etapa deste plano.
+central e das três ferramentas, badges verificáveis e links rápidos. A descrição
+e os tópicos do repositório também estão configurados. O social preview em
+1280×640 está preparado em `docs/social-preview.png`; restam o upload pela tela
+de configurações do GitHub e o destaque no perfil.
 
 ## Seção própria em `belluzzi.dev`
 

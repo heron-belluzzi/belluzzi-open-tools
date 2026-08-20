@@ -6,6 +6,11 @@ Free, open source, privacy-first tools maintained by
 The project follows the visual identity of the main Belluzzi website and
 supports light and dark themes, Brazilian Portuguese, and English.
 
+[![CI](https://github.com/heron-belluzzi/belluzzi-open-tools/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/heron-belluzzi/belluzzi-open-tools/actions/workflows/ci.yml)
+[![Latest release](https://img.shields.io/github/v/release/heron-belluzzi/belluzzi-open-tools?style=flat-square&label=release&color=c84a5c)](https://github.com/heron-belluzzi/belluzzi-open-tools/releases/latest)
+[![License](https://img.shields.io/github/license/heron-belluzzi/belluzzi-open-tools?style=flat-square&color=c84a5c)](LICENSE)
+[![Live toolkit](https://img.shields.io/badge/live-tools.belluzzi.dev-c84a5c?style=flat-square)](https://tools.belluzzi.dev/en)
+
 [![Belluzzi Open Tools live toolkit](docs/screenshots/overview.png)](https://tools.belluzzi.dev/en)
 
 <p align="center">
