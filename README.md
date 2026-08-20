@@ -124,7 +124,10 @@ language negotiation and redirects to `/pt/pass` or `/en/pass`.
 The [`utm.belluzzi.dev`](https://utm.belluzzi.dev) alias redirects to `/pt/utm`
 or `/en/utm` using the same language and query-string rules.
 
-All three aliases share the `tools.belluzzi.dev` application and a single
+The [`data.belluzzi.dev`](https://data.belluzzi.dev) alias redirects to
+`/pt/data` or `/en/data` using the same negotiation rules.
+
+All four aliases share the `tools.belluzzi.dev` application and a single
 Let’s Encrypt certificate, with automatic renewal managed by CloudPanel.
 
 ## Privacy

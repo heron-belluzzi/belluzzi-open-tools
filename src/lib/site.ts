@@ -20,6 +20,7 @@ export const TOOL_ALIAS_ROUTES: Partial<Record<string, RouteKey>> = {
   "qr.belluzzi.dev": "qr",
   "pass.belluzzi.dev": "pass",
   "utm.belluzzi.dev": "utm",
+  "data.belluzzi.dev": "data",
 };
 
 export function aliasRouteForHost(hostname: string) {

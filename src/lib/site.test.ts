@@ -35,6 +35,7 @@ describe("aliasRouteForHost", () => {
     expect(aliasRouteForHost("qr.belluzzi.dev")).toBe("qr");
     expect(aliasRouteForHost("PASS.BELLUZZI.DEV")).toBe("pass");
     expect(aliasRouteForHost("utm.belluzzi.dev")).toBe("utm");
+    expect(aliasRouteForHost("data.belluzzi.dev")).toBe("data");
     expect(aliasRouteForHost("tools.belluzzi.dev")).toBeNull();
   });
 });

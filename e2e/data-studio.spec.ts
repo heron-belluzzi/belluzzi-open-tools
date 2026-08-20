@@ -1,6 +1,35 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
+test("Data alias negotiates the browser language and preserves the query", async ({
+  request,
+}) => {
+  const english = await request.get("/?format=json", {
+    headers: {
+      host: "data.belluzzi.dev",
+      "accept-language": "en-US,en;q=0.9,pt-BR;q=0.7",
+    },
+    maxRedirects: 0,
+  });
+  expect(english.status()).toBe(307);
+  expect(english.headers().location).toBe(
+    "https://tools.belluzzi.dev/en/data?format=json",
+  );
+  expect(english.headers().vary).toContain("Accept-Language");
+
+  const portuguese = await request.get("/", {
+    headers: {
+      host: "data.belluzzi.dev",
+      "accept-language": "pt-BR,pt;q=0.9,en;q=0.8",
+    },
+    maxRedirects: 0,
+  });
+  expect(portuguese.status()).toBe(307);
+  expect(portuguese.headers().location).toBe(
+    "https://tools.belluzzi.dev/pt/data",
+  );
+});
+
 test("formats JSON and converts it to YAML without network calls", async ({
   context,
   page,
