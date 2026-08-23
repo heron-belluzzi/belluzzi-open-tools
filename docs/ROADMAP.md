@@ -101,7 +101,35 @@ O plano detalhado está em
 
 ## Produtos posteriores
 
-1. **Hook:** inbox temporário e seguro para webhooks.
+### Hook — sexta release
+
+- [ ] Criar inbox temporário e seguro para webhooks.
+- [ ] Gerar endpoints imprevisíveis para receber requisições HTTP.
+- [ ] Exibir método, headers, query string e payload com redaction de segredos.
+- [ ] Aplicar limites de tamanho, expiração automática e rate limiting.
+- [ ] Manter o produto sem cadastro na primeira versão e documentar privacidade.
+- [ ] Publicar com PT/EN, temas, mobile, teclado e testes proporcionais ao risco.
+
+### SiteCheck — AI & Agent Readiness — sétima release
+
+- [ ] Evoluir o SiteCheck com uma categoria `IA & Agentes`, sem criar um
+  produto separado na primeira versão.
+- [ ] Verificar políticas de acesso para crawlers de busca, uso por usuários e
+  treinamento, explicando que essas finalidades são diferentes.
+- [ ] Analisar `robots.txt`, meta robots e `X-Robots-Tag` por user agent.
+- [ ] Verificar conteúdo útil no HTML inicial, idioma, hierarquia semântica,
+  links descobríveis e dados estruturados JSON-LD.
+- [ ] Detectar `llms.txt` e validar seu formato como sinal experimental, sem
+  tratá-lo como padrão obrigatório ou fator de pontuação.
+- [ ] Detectar OpenAPI, MCP, WebMCP e Agent Card apenas quando forem aplicáveis
+  ao tipo de site analisado.
+- [ ] Produzir recomendações acionáveis em PT-BR e inglês, sem pontuação
+  numérica, persistência ou afirmações de posicionamento garantido em IA.
+- [ ] Reutilizar as proteções SSRF, DNS pinning, limites de resposta,
+  concorrência e rate limiting existentes no SiteCheck.
+- [ ] Considerar um produto ou domínio separado somente se a evolução exigir
+  simulação com modelos, múltiplas páginas, histórico, monitoramento ou APIs
+  pagas.
 
 ## Definição de pronto
 

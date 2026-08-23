@@ -59,8 +59,16 @@ somente locale, conclusão, contagens agregadas ou código genérico de erro.
 
 ## Proteção de borda
 
-Além dos limites da aplicação, a instância oficial usa uma regra Cloudflare
-para `/api/site-check`: três requisições por IP em dez segundos, com mitigação
-de dez segundos. A regra protege rajadas; a aplicação limita uso prolongado e
-concorrência na origem.
+Além dos limites da aplicação, está planejada uma regra Cloudflare para
+`/api/site-check`: três requisições por IP em dez segundos, com bloqueio de dez
+segundos. A regra protegerá rajadas antes que elas cheguem à origem; a aplicação
+continuará responsável por limitar uso prolongado e concorrência.
+
+Configuração recomendada no painel da zona `belluzzi.dev`:
+
+- expressão baseada no caminho `/api/site-check`;
+- característica de contagem por endereço IP;
+- três requisições em dez segundos;
+- ação `Block` por dez segundos;
+- manter a proteção interna ativa, pois o contador de borda não a substitui.
 
