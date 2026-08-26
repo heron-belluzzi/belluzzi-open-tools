@@ -1,4 +1,4 @@
-# SiteCheck — AI & Agent Readiness
+# SiteCheck: AI & Agent Readiness
 
 Este documento especifica a sétima release do Belluzzi Open Tools. A entrega
 será uma evolução do SiteCheck, depois do Hook, sem novo produto, domínio,
@@ -222,28 +222,28 @@ com fixtures locais; somente a camada de rede poderá acessar destinos públicos
 
 ## Plano de implementação
 
-### Fase 1 — contratos e parsers
+### Fase 1: contratos e parsers
 
 - Congelar o catálogo inicial de crawlers com fontes e data de revisão.
 - Criar tipos e IDs de checks.
 - Implementar parser de robots, meta robots e `X-Robots-Tag`.
 - Implementar parsers de JSON-LD, `llms.txt` e Agent Card.
 
-### Fase 2 — coleta segura e relatório
+### Fase 2: coleta segura e relatório
 
 - Reaproveitar o conteúdo de `robots.txt` já baixado pelo SiteCheck.
 - Adicionar as duas novas sondas limitadas: `llms.txt` e Agent Card.
 - Montar evidências e recomendações sem ultrapassar o orçamento de rede.
 - Manter compatibilidade da API para consumidores do relatório atual.
 
-### Fase 3 — experiência bilíngue
+### Fase 3: experiência bilíngue
 
 - Adicionar categoria, matriz de políticas e recursos detectados.
 - Escrever textos PT-BR e inglês equivalentes.
 - Validar estados válido, ausente, bloqueado, inválido, experimental e não
   aplicável.
 
-### Fase 4 — qualidade e publicação
+### Fase 4: qualidade e publicação
 
 - Executar lint, typecheck, unitários, build e E2E.
 - Revisar segurança e privacidade.
@@ -308,14 +308,14 @@ com fixtures locais; somente a camada de rede poderá acessar destinos públicos
 Revisadas em 26 de agosto de 2026; devem ser verificadas novamente antes da
 implementação:
 
-- [Robots Exclusion Protocol — RFC 9309](https://www.rfc-editor.org/rfc/rfc9309)
-- [OpenAI — Publishers and Developers FAQ](https://help.openai.com/en/articles/12627856-publishers-and-developers-faq)
-- [Anthropic — crawler controls](https://support.anthropic.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler)
-- [Google — robots meta e X-Robots-Tag](https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag)
-- [Google — JavaScript SEO](https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics)
-- [Google — structured data](https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data)
-- [`llms.txt` v2 — proposta](https://llmstxt.org/)
-- [WebMCP — Community Group Draft](https://webmachinelearning.github.io/webmcp/)
+- [Robots Exclusion Protocol: RFC 9309](https://www.rfc-editor.org/rfc/rfc9309)
+- [OpenAI: Publishers and Developers FAQ](https://help.openai.com/en/articles/12627856-publishers-and-developers-faq)
+- [Anthropic: crawler controls](https://support.anthropic.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler)
+- [Google: robots meta e X-Robots-Tag](https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag)
+- [Google: JavaScript SEO](https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics)
+- [Google: structured data](https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data)
+- [`llms.txt` v2: proposta](https://llmstxt.org/)
+- [WebMCP: Community Group Draft](https://webmachinelearning.github.io/webmcp/)
 - [Model Context Protocol](https://modelcontextprotocol.io/specification/2025-11-25)
 - [Agent2Agent Protocol](https://a2a-protocol.org/latest/specification/)
 - [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)

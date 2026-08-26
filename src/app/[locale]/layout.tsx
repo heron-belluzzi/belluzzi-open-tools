@@ -57,8 +57,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: `${SITE_URL}/${locale}`,
       siteName: SITE_NAME,
       title: isPt
-        ? "Belluzzi Open Tools — utilidade com privacidade"
-        : "Belluzzi Open Tools — useful with privacy",
+        ? "Belluzzi Open Tools: utilidade com privacidade"
+        : "Belluzzi Open Tools: useful with privacy",
       description: isPt
         ? "Ferramentas abertas que resolvem tarefas reais sem transformar seus dados em produto."
         : "Open tools that solve real tasks without turning your data into a product.",

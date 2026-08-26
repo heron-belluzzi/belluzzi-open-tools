@@ -1,6 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
   <title id="title">Belluzzi Open Tools</title>
-  <rect width="512" height="512" rx="96" fill="#16161a"/>
-  <path fill="#f2f3f1" d="M128 112h118c80 0 126 32 126 91 0 35-20 62-55 75 44 11 67 41 67 86 0 68-49 104-139 104H128V112Zm105 142c43 0 63-14 63-42 0-27-19-39-61-39h-31v81h29Zm8 153c45 0 67-15 67-47 0-31-22-46-68-46h-36v93h37Z"/>
-  <circle cx="399" cy="399" r="28" fill="#c84a5c"/>
+  <style>
+    .background { fill: #f4f4f2; }
+    .letter { fill: #16161a; }
+    .dot { fill: #9b2c3b; }
+
+    @media (prefers-color-scheme: dark) {
+      .background { fill: #16161a; }
+      .letter { fill: #f2f3f1; }
+      .dot { fill: #c84a5c; }
+    }
+  </style>
+  <rect class="background" width="512" height="512" rx="96"/>
+  <path class="letter" d="M128 112h118c80 0 126 32 126 91 0 35-20 62-55 75 44 11 67 41 67 86 0 68-49 104-139 104H128V112Zm105 142c43 0 63-14 63-42 0-27-19-39-61-39h-31v81h29Zm8 153c45 0 67-15 67-47 0-31-22-46-68-46h-36v93h37Z"/>
+  <circle class="dot" cx="399" cy="399" r="28"/>
 </svg>

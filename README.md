@@ -150,13 +150,13 @@ optional `llms.txt`, OpenAPI, MCP, WebMCP and A2A signals without invoking them.
 
 ## Roadmap
 
-1. QR Code Studio — available.
-2. Password and passphrase generator — available.
-3. UTM and WhatsApp link builder — available.
-4. JSON, YAML, and CSV toolkit — available.
-5. SiteCheck for HTTP, TLS, security headers, SEO and indexing — available.
-6. Hook — planned.
-7. SiteCheck AI and agent readiness — in development.
+1. QR Code Studio: available.
+2. Password and passphrase generator: available.
+3. UTM and WhatsApp link builder: available.
+4. JSON, YAML, and CSV toolkit: available.
+5. SiteCheck for HTTP, TLS, security headers, SEO and indexing: available.
+6. Hook: planned.
+7. SiteCheck AI and agent readiness: in development.
 
 ## License
 
