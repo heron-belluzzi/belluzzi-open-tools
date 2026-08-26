@@ -96,7 +96,7 @@ O plano detalhado está em
 - [x] Implementar uma análise acionável em PT-BR e inglês, sem persistência.
 - [x] Publicar a release `v0.5.0` na instância oficial.
 - [x] Ativar `check.belluzzi.dev` e TLS após validar a rota canônica.
-- [ ] Adicionar uma camada externa de rate limiting na Cloudflare para
+- [x] Adicionar uma camada externa de rate limiting na Cloudflare para
   `/api/site-check`.
 
 ## Produtos posteriores
