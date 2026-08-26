@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" role="img" aria-labelledby="title">
+  <title id="title">Belluzzi Open Tools</title>
+  <style>
+    .background { fill: #f4f4f2; }
+    .letter { fill: #16161a; }
+    .dot { fill: #9b2c3b; }
+    .border { fill: none; stroke: rgba(0, 0, 0, 0.09); stroke-width: 1; }
+
+    @media (prefers-color-scheme: dark) {
+      .background { fill: #16161a; }
+      .letter { fill: #f2f3f1; }
+      .dot { fill: #c84a5c; }
+      .border { stroke: #2b2d32; }
+    }
+  </style>
+
+  <rect class="background" width="192" height="192" rx="42.24"/>
+  <rect class="border" x="0.5" y="0.5" width="191" height="191" rx="41.74"/>
+
+  <g transform="matrix(1.35 0 0 1.48 -38.25 -48)">
+    <path class="letter" fill-rule="evenodd" d="M59 61H109L114 62L117 63L119 64L125 70L126 72L127 74L128 78V81L127 85L126 88L120 94L117 95L119 98L121 99L123 100L125 102H126L127 103V104L129 106L130 108L131 111V122L130 125L129 127L128 129L122 135L120 136L117 137L113 138L105 139H59V61ZM84 76L99 76L101 77L105 81V86L101 90L99 91L83 90L84 76ZM84 105L101 105L104 106L108 110V116L107 118L104 121L101 122L83 121L84 105Z"/>
+  </g>
+
+  <circle class="dot" cx="159" cy="154" r="10"/>
+</svg>
