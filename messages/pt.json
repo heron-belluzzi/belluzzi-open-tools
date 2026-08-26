@@ -312,14 +312,14 @@
   },
   "sitecheck": {
     "meta_title": "Analisador gratuito de site, SEO e segurança",
-    "meta_description": "Verifique HTTP, TLS, headers de segurança, SEO, robots.txt e sitemap.xml com um relatório gratuito e acionável.",
+    "meta_description": "Verifique HTTP, TLS, segurança, SEO, indexação e sinais públicos para IA e agentes com um relatório gratuito e acionável.",
     "eyebrow": "SiteCheck · diagnóstico público e seguro",
     "title": "Seu site, visto de fora.",
-    "description": "Informe um endereço público e receba um checklist claro de disponibilidade, TLS, headers, SEO e indexação. Sem crawler invasivo ou armazenamento do resultado.",
+    "description": "Informe um endereço público e receba um checklist claro de disponibilidade, segurança, SEO, indexação e sinais para IA e agentes. Sem crawler invasivo ou armazenamento do resultado.",
     "back": "Todas as ferramentas",
     "url_label": "Endereço do site",
     "url_placeholder": "exemplo.com.br",
-    "input_hint": "A análise acessa somente a URL informada, robots.txt e sitemap.xml.",
+    "input_hint": "A análise acessa no máximo a URL informada e quatro recursos públicos na mesma origem.",
     "use_example": "Usar belluzzi.dev",
     "analyze": "Analisar site",
     "analyzing": "Analisando…",
@@ -347,7 +347,49 @@
       "tls": "TLS e certificado",
       "headers": "Headers e segurança",
       "seo": "SEO e conteúdo",
-      "indexing": "Robots e sitemap"
+      "indexing": "Robots e sitemap",
+      "agents": "IA e agentes"
+    },
+    "agents": {
+      "profile_label": "Perfil técnico inferido",
+      "profiles": {
+        "website": "Site público",
+        "developer_api": "API para desenvolvedores",
+        "agent_service": "Serviço com interface de agente"
+      },
+      "experimental": "Sinais experimentais",
+      "policy_title": "Política por crawler",
+      "policy_note": "Busca, ações iniciadas pelo usuário e treinamento são finalidades diferentes. Bloquear treinamento pode ser uma escolha editorial legítima.",
+      "provider": "Provedor",
+      "crawler": "Crawler",
+      "purpose": "Finalidade",
+      "decision": "Decisão",
+      "evidence": "Evidência",
+      "purposes": {
+        "search": "Busca",
+        "user_action": "Ação do usuário",
+        "training": "Treinamento"
+      },
+      "decisions": {
+        "allowed": "Permitido",
+        "blocked": "Bloqueado",
+        "not_declared": "Não declarado",
+        "unavailable": "Indisponível",
+        "invalid": "Inválido"
+      },
+      "resource_status": {
+        "available": "Disponível",
+        "missing": "Não encontrado",
+        "invalid": "Inválido",
+        "error": "Indisponível",
+        "too_large": "Acima do limite"
+      },
+      "valid": "Estrutura básica válida.",
+      "invalid": "O recurso existe, mas precisa de correção.",
+      "optional": "Recurso opcional; a ausência não penaliza o relatório.",
+      "signals": "Interfaces detectadas",
+      "none": "Nenhuma",
+      "detection_only": "Somente detecção: nenhuma ferramenta ou operação remota foi executada."
     },
     "errors": {
       "INVALID_URL": "Informe um domínio ou uma URL HTTP/HTTPS válida, sem usuário ou senha.",
@@ -383,7 +425,16 @@
       "seo_opengraph": { "title": "Metadados Open Graph", "recommendation": "Título, descrição e imagem Open Graph melhoram a prévia ao compartilhar a página." },
       "seo_h1": { "title": "Título principal H1", "recommendation": "Uma página costuma se beneficiar de um H1 claro. Ausência ou vários H1 exigem revisão contextual." },
       "indexing_robots": { "title": "Arquivo robots.txt", "recommendation": "Disponibilize um robots.txt válido no domínio final, mesmo que ele apenas permita o rastreamento." },
-      "indexing_sitemap": { "title": "Arquivo sitemap.xml", "recommendation": "Disponibilize um sitemap ou índice de sitemaps válido para facilitar a descoberta de URLs." }
+      "indexing_sitemap": { "title": "Arquivo sitemap.xml", "recommendation": "Disponibilize um sitemap ou índice de sitemaps válido para facilitar a descoberta de URLs." },
+      "agents_crawl_search": { "title": "Acesso por crawlers de busca", "recommendation": "Confirme se bloqueios a crawlers de descoberta são intencionais, pois podem limitar como o conteúdo aparece em experiências de busca." },
+      "agents_crawl_user": { "title": "Acesso iniciado por usuários", "recommendation": "Crawlers acionados por usuários precisam acessar a página para responder a solicitações que apontem diretamente para ela." },
+      "agents_crawl_training": { "title": "Uso para treinamento de modelos", "recommendation": "Permitir ou bloquear treinamento é uma decisão editorial. O SiteCheck informa a política sem tratá-la como falha." },
+      "agents_page_directives": { "title": "Diretivas robots da página", "recommendation": "Revise meta robots e X-Robots-Tag em conjunto com robots.txt; diretivas na página podem não ser vistas quando o crawling está bloqueado." },
+      "agents_initial_html": { "title": "Conteúdo no HTML inicial", "recommendation": "Entregue texto útil, landmarks semânticos e links descobríveis no HTML inicial. Esta análise não executa JavaScript." },
+      "agents_structured_data": { "title": "Dados estruturados JSON-LD", "recommendation": "Use JSON-LD válido com @context, @type e URLs absolutas coerentes. A presença não garante rich results." },
+      "agents_llms_txt": { "title": "Arquivo experimental llms.txt", "recommendation": "Se optar por publicar llms.txt, mantenha título, resumo, seções e links válidos. O arquivo continua opcional e experimental." },
+      "agents_interfaces": { "title": "Interfaces declaradas para agentes", "recommendation": "OpenAPI, MCP, WebMCP e A2A só são informados quando declarados explicitamente; sua ausência em um site comum é normal." },
+      "agents_agent_card": { "title": "A2A Agent Card", "recommendation": "Um Agent Card publicado deve ter identidade, descrição e interface pública válidas. O SiteCheck não chama o agente descrito." }
     }
   }
 }

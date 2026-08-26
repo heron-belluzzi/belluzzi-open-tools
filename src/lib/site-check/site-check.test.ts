@@ -1,12 +1,17 @@
 import { describe, expect, it } from "vitest";
 import {
+  analyzeSite,
   analyzeResponseHeaders,
   analyzeResponseHtml,
 } from "./analyzer";
+import { analyzeAgentReadiness } from "./agent-analyzer";
+import { analyzeAgentCard } from "./agent-card";
 import { SiteCheckError } from "./errors";
+import { analyzeLlmsTxt } from "./llms-txt";
 import {
   isPublicIpAddress,
   normalizeTargetUrl,
+  safeRequest,
   type SafeResponse,
 } from "./network";
 import {
@@ -14,6 +19,8 @@ import {
   consumeSiteCheckRateLimit,
   resetSiteCheckLimitsForTests,
 } from "./rate-limit";
+import { evaluateRobotsPolicy, parseRobotsTxt } from "./robots-policy";
+import { analyzeStructuredData } from "./structured-data";
 
 function response(overrides: Partial<SafeResponse> = {}): SafeResponse {
   return {
@@ -102,6 +109,119 @@ describe("SiteCheck response analysis", () => {
     );
 
     expect(checks.every(({ status }) => status === "pass")).toBe(true);
+  });
+});
+
+describe("SiteCheck AI and agent readiness parsers", () => {
+  it("applies specific robots groups, longest rules and allow on equal matches", () => {
+    const document = parseRobotsTxt(`
+      User-agent: *
+      Disallow: /private
+
+      User-agent: GPTBot
+      Disallow: /docs
+      Allow: /docs/public
+      Disallow: /docs/public
+    `);
+
+    expect(evaluateRobotsPolicy(document, "ClaudeBot", "/private/report").decision).toBe("blocked");
+    expect(evaluateRobotsPolicy(document, "GPTBot", "/private/report").decision).toBe("allowed");
+    expect(evaluateRobotsPolicy(document, "GPTBot", "/docs/public")).toMatchObject({
+      decision: "allowed",
+      evidence: "allow: /docs/public",
+    });
+  });
+
+  it("keeps an undeclared crawler distinct from an invalid robots file", () => {
+    const declared = parseRobotsTxt("User-agent: Googlebot\nDisallow:");
+    expect(evaluateRobotsPolicy(declared, "GPTBot", "/").decision).toBe("not_declared");
+    expect(evaluateRobotsPolicy(parseRobotsTxt("Sitemap: /sitemap.xml"), "GPTBot", "/").decision).toBe("invalid");
+  });
+
+  it("validates llms.txt structure without fetching its links", () => {
+    expect(analyzeLlmsTxt(`# Example\n> Product summary\n\n## Docs\n- [Guide](/guide.md)\n- [Full](/llms-full.txt)`, "https://example.com/llms.txt")).toMatchObject({
+      valid: true,
+      links: 2,
+      hasFullVersion: true,
+    });
+    expect(analyzeLlmsTxt("# Example", "https://example.com/llms.txt").valid).toBe(false);
+  });
+
+  it("reports valid, malformed and incomplete JSON-LD independently", () => {
+    expect(analyzeStructuredData([
+      JSON.stringify({ "@context": "https://schema.org", "@type": "Organization", url: "https://example.com" }),
+      "{broken",
+      JSON.stringify({ "@context": "https://schema.org", name: "No type" }),
+    ])).toEqual({ valid: 1, invalid: 2, types: ["Organization"] });
+  });
+
+  it("rejects incomplete Agent Cards and private operational URLs", () => {
+    expect(analyzeAgentCard(JSON.stringify({
+      name: "Public agent",
+      description: "A public test agent",
+      url: "https://agent.example.com/a2a",
+    }))).toMatchObject({ valid: true, name: "Public agent", privateUrls: 0 });
+    expect(analyzeAgentCard(JSON.stringify({
+      name: "Private agent",
+      description: "Not publicly callable",
+      url: "http://127.0.0.1/a2a",
+    }))).toMatchObject({ valid: false, privateUrls: 1 });
+  });
+
+  it("treats blocked training and absent experimental resources as information", () => {
+    const analysis = analyzeAgentReadiness(
+      response({
+        body: Buffer.from(`<!doctype html><html lang="en"><head>
+          <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite"}</script>
+        </head><body><main><h1>Useful public website</h1><p>${"Public content ".repeat(30)}</p></main></body></html>`),
+      }),
+      {
+        resource: { url: "https://example.com/robots.txt", status: "available", statusCode: 200 },
+        content: "User-agent: GPTBot\nDisallow: /\nUser-agent: *\nAllow: /",
+      },
+      { resource: { url: "https://example.com/llms.txt", status: "missing", statusCode: 404 } },
+      { resource: { url: "https://example.com/.well-known/agent-card.json", status: "missing", statusCode: 404 } },
+    );
+
+    expect(analysis.agents.policies.find(({ crawler }) => crawler === "GPTBot")?.decision).toBe("blocked");
+    expect(analysis.checks.find(({ id }) => id === "agents_crawl_training")?.status).toBe("info");
+    expect(analysis.checks.find(({ id }) => id === "agents_llms_txt")?.status).toBe("info");
+    expect(analysis.checks.find(({ id }) => id === "agents_agent_card")?.status).toBe("info");
+  });
+
+  it("keeps the complete analysis within five same-origin resources", async () => {
+    const requested: string[] = [];
+    const request: typeof safeRequest = async (url, _maxBytes, _deadline, options = {}) => {
+      requested.push(url.pathname);
+      if (url.pathname !== "/") expect(options.allowedOrigin).toBe("https://example.com");
+      const bodies: Record<string, string> = {
+        "/": "<!doctype html><html lang=\"en\"><head><title>Example website title</title></head><body><main><h1>Example</h1></main></body></html>",
+        "/robots.txt": "User-agent: *\nAllow: /",
+        "/sitemap.xml": "<urlset></urlset>",
+        "/llms.txt": "# Example\n> Summary\n## Docs\n- [Guide](/guide.md)",
+        "/.well-known/agent-card.json": JSON.stringify({
+          name: "Example Agent",
+          description: "A public example agent",
+          url: "https://example.com/a2a",
+        }),
+      };
+      return response({
+        url: url.toString(),
+        body: Buffer.from(bodies[url.pathname] ?? ""),
+      });
+    };
+
+    const report = await analyzeSite("example.com", request);
+    expect(requested).toEqual([
+      "/",
+      "/robots.txt",
+      "/sitemap.xml",
+      "/llms.txt",
+      "/.well-known/agent-card.json",
+    ]);
+    expect(report.agents.profile).toBe("agent_service");
+    expect(report.agents.llms.valid).toBe(true);
+    expect(report.agents.agentCard.valid).toBe(true);
   });
 });
 

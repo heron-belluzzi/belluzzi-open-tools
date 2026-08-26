@@ -1,4 +1,4 @@
-# SiteCheck v0.5.0
+# SiteCheck
 
 ## Objetivo
 
@@ -14,6 +14,10 @@ em `/pt/check` e `/en/check`; a API é `POST /api/site-check`.
 - título, descrição, canonical, robots meta, viewport, idioma, hreflang,
   Open Graph e H1;
 - `robots.txt` e `sitemap.xml` no domínio final;
+- políticas de crawling separadas para busca, ações iniciadas pelo usuário e
+  treinamento de modelos;
+- meta robots, `X-Robots-Tag`, conteúdo no HTML inicial e JSON-LD;
+- detecção passiva de `llms.txt`, OpenAPI, MCP, WebMCP e A2A Agent Card;
 - relatório em PT-BR e inglês, imprimível pelo navegador.
 
 Não entram nesta versão: crawler de páginas internas, execução de JavaScript,
@@ -32,9 +36,15 @@ Content-Type: application/json
 ```
 
 Uma entrada sem protocolo assume HTTPS. A resposta inclui alvo normalizado e
-final, cadeia de redirects, duração, dados TLS, estado de robots/sitemap e uma
-lista de verificações com `id`, `category`, `status` e valor opcional. Os status
-são `pass`, `warning`, `fail` e `info`.
+final, cadeia de redirects, duração, dados TLS, estado de robots/sitemap,
+evidências estruturadas em `agents` e uma lista de verificações com `id`,
+`category`, `status` e valor opcional. Os status são `pass`, `warning`, `fail`
+e `info`.
+
+A seção `agents` é aditiva para preservar consumidores do contrato anterior.
+Ela contém perfil técnico inferido, matriz por crawler, diretivas da página,
+HTML inicial, JSON-LD, recursos opcionais e interfaces detectadas. Não há nota
+numérica ou promessa de inclusão em respostas de IA.
 
 Erros usam `{ "error": { "code": "..." } }` e códigos estáveis:
 `INVALID_URL`, `TARGET_BLOCKED`, `PORT_NOT_ALLOWED`, `TIMEOUT`,
@@ -51,11 +61,26 @@ Erros usam `{ "error": { "code": "..." } }` e códigos estáveis:
 - nenhuma propagação de cookies, autenticação ou headers do visitante;
 - `Accept-Encoding: identity` para limitar os bytes realmente recebidos;
 - cinco segundos por requisição e quinze segundos por análise;
-- 1 MiB para HTML e sitemap e 256 KiB para robots;
+- 1 MiB para HTML e sitemap e 256 KiB para robots, `llms.txt` e Agent Card;
+- no máximo cinco recursos lógicos por análise: página, robots, sitemap,
+  `llms.txt` e Agent Card;
+- recursos auxiliares não podem redirecionar para outra origem;
 - até duas análises simultâneas e dez por IP a cada dez minutos.
 
 O código nunca registra URL, query ou IP analisado. Eventos de Analytics contêm
 somente locale, conclusão, contagens agregadas ou código genérico de erro.
+
+## IA e agentes
+
+O catálogo inicial diferencia crawlers de busca, uso iniciado por pessoas e
+treinamento. Bloquear treinamento é uma preferência editorial legítima e
+permanece informativo. Ausência de `llms.txt`, OpenAPI, MCP, WebMCP ou A2A em
+um site comum também não gera falha.
+
+O SiteCheck interpreta apenas sinais públicos e o HTML inicial: não executa
+JavaScript, não segue links de `llms.txt`, não inicializa servidores MCP, não
+chama operações OpenAPI ou A2A e não simula um provedor de IA. `llms.txt` e
+WebMCP são apresentados como experimentais.
 
 ## Proteção de borda
 

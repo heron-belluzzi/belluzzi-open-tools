@@ -3,7 +3,8 @@ export type SiteCheckCategory =
   | "tls"
   | "headers"
   | "seo"
-  | "indexing";
+  | "indexing"
+  | "agents";
 
 export type SiteCheckStatus = "pass" | "warning" | "fail" | "info";
 
@@ -41,7 +42,16 @@ export type SiteCheckId =
   | "seo_opengraph"
   | "seo_h1"
   | "indexing_robots"
-  | "indexing_sitemap";
+  | "indexing_sitemap"
+  | "agents_crawl_search"
+  | "agents_crawl_user"
+  | "agents_crawl_training"
+  | "agents_page_directives"
+  | "agents_initial_html"
+  | "agents_structured_data"
+  | "agents_llms_txt"
+  | "agents_interfaces"
+  | "agents_agent_card";
 
 export type SiteCheckResult = {
   id: SiteCheckId;
@@ -73,6 +83,58 @@ export type SiteCheckResource = {
   statusCode?: number;
 };
 
+export type AgentPolicyPurpose = "search" | "user_action" | "training";
+
+export type AgentPolicyDecision =
+  | "allowed"
+  | "blocked"
+  | "not_declared"
+  | "unavailable"
+  | "invalid";
+
+export type AgentPolicyEvidence = {
+  provider: string;
+  crawler: string;
+  purpose: AgentPolicyPurpose;
+  decision: AgentPolicyDecision;
+  source: "robots";
+  evidence?: string;
+};
+
+export type AgentSignal = "openapi" | "mcp" | "webmcp" | "a2a";
+
+export type AgentReadiness = {
+  profile: "website" | "developer_api" | "agent_service";
+  policies: AgentPolicyEvidence[];
+  pageDirectives: {
+    meta: string[];
+    headers: string[];
+    conflicts: string[];
+  };
+  initialHtml: {
+    textLength: number;
+    appShellSuspected: boolean;
+    semanticLandmarks: number;
+    discoverableLinks: number;
+  };
+  structuredData: {
+    valid: number;
+    invalid: number;
+    types: string[];
+  };
+  llms: SiteCheckResource & {
+    experimental: true;
+    valid: boolean;
+    links: number;
+    hasFullVersion: boolean;
+  };
+  agentCard: SiteCheckResource & {
+    valid: boolean;
+    name?: string;
+  };
+  signals: AgentSignal[];
+};
+
 export type SiteCheckReport = {
   analyzedAt: string;
   durationMs: number;
@@ -89,6 +151,7 @@ export type SiteCheckReport = {
     robots: SiteCheckResource;
     sitemap: SiteCheckResource;
   };
+  agents: AgentReadiness;
   checks: SiteCheckResult[];
 };
 

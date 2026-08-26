@@ -10,7 +10,7 @@ import type {
   SiteCheckStatus,
 } from "@/lib/site-check/types";
 
-const categories: SiteCheckCategory[] = ["http", "tls", "headers", "seo", "indexing"];
+const categories: SiteCheckCategory[] = ["http", "tls", "headers", "seo", "indexing", "agents"];
 const summaryStatuses: SiteCheckStatus[] = ["pass", "warning", "fail", "info"];
 
 const statusStyles: Record<SiteCheckStatus, string> = {
@@ -204,6 +204,106 @@ export default function SiteCheckStudio() {
                 <h3 className="font-serif text-2xl font-medium text-ink">
                   {t(`categories.${category}`)}
                 </h3>
+                {category === "agents" && (
+                  <div className="mt-5 space-y-5">
+                    <div className="flex flex-col gap-3 rounded-xl border border-border bg-bg p-4 sm:flex-row sm:items-center sm:justify-between">
+                      <div>
+                        <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-faint">
+                          {t("agents.profile_label")}
+                        </p>
+                        <p className="mt-1 font-medium text-ink">
+                          {t(`agents.profiles.${report.agents.profile}`)}
+                        </p>
+                      </div>
+                      <span className="inline-flex w-fit rounded-full border border-violet-500/30 bg-violet-500/10 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-violet-700 dark:text-violet-300">
+                        {t("agents.experimental")}
+                      </span>
+                    </div>
+
+                    <div>
+                      <h4 className="font-medium text-ink">{t("agents.policy_title")}</h4>
+                      <p className="mt-1 text-sm leading-6 text-muted">{t("agents.policy_note")}</p>
+                      <div
+                        role="region"
+                        aria-label={t("agents.policy_title")}
+                        tabIndex={0}
+                        className="mt-3 overflow-x-auto rounded-xl border border-border focus:outline-none focus:ring-2 focus:ring-accent/50"
+                      >
+                        <table
+                          aria-label={t("agents.policy_title")}
+                          className="min-w-[680px] w-full border-collapse text-left text-sm"
+                        >
+                          <thead className="bg-surface-2 font-mono text-[9px] uppercase tracking-[0.12em] text-faint">
+                            <tr>
+                              <th scope="col" className="px-3 py-3 font-medium">{t("agents.provider")}</th>
+                              <th scope="col" className="px-3 py-3 font-medium">{t("agents.crawler")}</th>
+                              <th scope="col" className="px-3 py-3 font-medium">{t("agents.purpose")}</th>
+                              <th scope="col" className="px-3 py-3 font-medium">{t("agents.decision")}</th>
+                              <th scope="col" className="px-3 py-3 font-medium">{t("agents.evidence")}</th>
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-border">
+                            {report.agents.policies.map((policy) => (
+                              <tr key={`${policy.provider}-${policy.crawler}`}>
+                                <td className="px-3 py-3 text-muted">{policy.provider}</td>
+                                <td className="px-3 py-3 font-mono text-xs text-ink">{policy.crawler}</td>
+                                <td className="px-3 py-3 text-muted">{t(`agents.purposes.${policy.purpose}`)}</td>
+                                <td className="px-3 py-3">
+                                  <span className={`inline-flex rounded-full border px-2 py-1 font-mono text-[9px] uppercase tracking-[0.1em] ${
+                                    policy.decision === "allowed"
+                                      ? statusStyles.pass
+                                      : policy.decision === "blocked" || policy.decision === "invalid"
+                                        ? statusStyles.warning
+                                        : statusStyles.info
+                                  }`}>
+                                    {t(`agents.decisions.${policy.decision}`)}
+                                  </span>
+                                </td>
+                                <td className="max-w-56 break-all px-3 py-3 font-mono text-xs text-faint">
+                                  {policy.evidence ?? "—"}
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+
+                    <div className="grid gap-3 sm:grid-cols-3">
+                      <div className="rounded-xl border border-border bg-bg p-4">
+                        <p className="font-mono text-[9px] uppercase tracking-[0.12em] text-faint">llms.txt</p>
+                        <p className="mt-2 font-medium text-ink">
+                          {t(`agents.resource_status.${report.agents.llms.status}`)}
+                        </p>
+                        <p className="mt-1 text-xs leading-5 text-muted">
+                          {report.agents.llms.status === "available"
+                            ? t(report.agents.llms.valid ? "agents.valid" : "agents.invalid")
+                            : t("agents.optional")}
+                        </p>
+                      </div>
+                      <div className="rounded-xl border border-border bg-bg p-4">
+                        <p className="font-mono text-[9px] uppercase tracking-[0.12em] text-faint">A2A Agent Card</p>
+                        <p className="mt-2 font-medium text-ink">
+                          {t(`agents.resource_status.${report.agents.agentCard.status}`)}
+                        </p>
+                        <p className="mt-1 text-xs leading-5 text-muted">
+                          {report.agents.agentCard.status === "available"
+                            ? report.agents.agentCard.name ?? t("agents.invalid")
+                            : t("agents.optional")}
+                        </p>
+                      </div>
+                      <div className="rounded-xl border border-border bg-bg p-4">
+                        <p className="font-mono text-[9px] uppercase tracking-[0.12em] text-faint">
+                          {t("agents.signals")}
+                        </p>
+                        <p className="mt-2 break-words font-medium text-ink">
+                          {report.agents.signals.length ? report.agents.signals.join(" · ") : t("agents.none")}
+                        </p>
+                        <p className="mt-1 text-xs leading-5 text-muted">{t("agents.detection_only")}</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
                 <div className="mt-5 divide-y divide-border">
                   {checks.map((check) => (
                     <div key={check.id} className="grid gap-3 py-5 first:pt-0 last:pb-0 md:grid-cols-[auto_1fr]">

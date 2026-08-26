@@ -115,24 +115,26 @@ O plano detalhado está em
 O planejamento detalhado está em
 [`docs/SITECHECK-AGENT-READINESS.md`](SITECHECK-AGENT-READINESS.md).
 
-- [ ] Evoluir o SiteCheck com uma categoria `IA & Agentes`, sem criar um
+- [x] Evoluir o SiteCheck com uma categoria `IA & Agentes`, sem criar um
   produto separado na primeira versão.
-- [ ] Verificar políticas de acesso para crawlers de busca, uso por usuários e
+- [x] Verificar políticas de acesso para crawlers de busca, uso por usuários e
   treinamento, explicando que essas finalidades são diferentes.
-- [ ] Analisar `robots.txt`, meta robots e `X-Robots-Tag` por user agent.
-- [ ] Verificar conteúdo útil no HTML inicial, idioma, hierarquia semântica,
+- [x] Analisar `robots.txt`, meta robots e `X-Robots-Tag` por user agent.
+- [x] Verificar conteúdo útil no HTML inicial, idioma, hierarquia semântica,
   links descobríveis e dados estruturados JSON-LD.
-- [ ] Detectar `llms.txt` e validar seu formato como sinal experimental, sem
+- [x] Detectar `llms.txt` e validar seu formato como sinal experimental, sem
   tratá-lo como padrão obrigatório ou fator de pontuação.
-- [ ] Detectar OpenAPI, MCP, WebMCP e Agent Card apenas quando forem aplicáveis
+- [x] Detectar OpenAPI, MCP, WebMCP e Agent Card apenas quando forem aplicáveis
   ao tipo de site analisado.
-- [ ] Produzir recomendações acionáveis em PT-BR e inglês, sem pontuação
+- [x] Produzir recomendações acionáveis em PT-BR e inglês, sem pontuação
   numérica, persistência ou afirmações de posicionamento garantido em IA.
-- [ ] Reutilizar as proteções SSRF, DNS pinning, limites de resposta,
+- [x] Reutilizar as proteções SSRF, DNS pinning, limites de resposta,
   concorrência e rate limiting existentes no SiteCheck.
-- [ ] Considerar um produto ou domínio separado somente se a evolução exigir
+- [x] Considerar um produto ou domínio separado somente se a evolução exigir
   simulação com modelos, múltiplas páginas, histórico, monitoramento ou APIs
   pagas.
+- [ ] Validar a implementação na instância oficial, atualizar screenshots e
+  publicar a release `v0.7.0`.
 
 ## Definição de pronto
 

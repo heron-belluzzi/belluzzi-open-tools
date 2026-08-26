@@ -1,4 +1,5 @@
 import { load } from "cheerio";
+import { analyzeAgentReadiness, type InspectedTextResource } from "./agent-analyzer";
 import { SiteCheckError } from "./errors";
 import {
   normalizeTargetUrl,
@@ -150,9 +151,10 @@ async function inspectResource(
   maxBytes: number,
   deadline: number,
   kind: "robots" | "sitemap",
-): Promise<{ resource: SiteCheckResource; check: SiteCheckResult }> {
+  request: typeof safeRequest,
+): Promise<{ resource: SiteCheckResource; check: SiteCheckResult; content?: string }> {
   try {
-    const response = await safeRequest(url, maxBytes, deadline);
+    const response = await request(url, maxBytes, deadline, { allowedOrigin: url.origin });
     const text = response.body.toString("utf8").trim();
     const available = response.status >= 200 && response.status < 300;
     const valid =
@@ -184,6 +186,7 @@ async function inspectResource(
         checkStatus,
         `${response.status}`,
       ),
+      ...(available ? { content: text } : {}),
     };
   } catch (error) {
     const tooLarge = error instanceof SiteCheckError && error.code === "RESPONSE_TOO_LARGE";
@@ -201,27 +204,90 @@ async function inspectResource(
   }
 }
 
-export async function analyzeSite(input: string): Promise<SiteCheckReport> {
+async function inspectOptionalResource(
+  url: URL,
+  maxBytes: number,
+  deadline: number,
+  request: typeof safeRequest,
+): Promise<InspectedTextResource> {
+  try {
+    const response = await request(url, maxBytes, deadline, { allowedOrigin: url.origin });
+    const available = response.status >= 200 && response.status < 300;
+    let content: string | undefined;
+    if (available) {
+      try {
+        content = new TextDecoder("utf-8", { fatal: true }).decode(response.body).trim();
+      } catch {
+        return {
+          resource: {
+            url: response.url,
+            status: "invalid",
+            statusCode: response.status,
+          },
+        };
+      }
+    }
+    return {
+      resource: {
+        url: response.url,
+        status: available ? "available" : response.status === 404 ? "missing" : "error",
+        statusCode: response.status,
+      },
+      ...(content !== undefined ? { content } : {}),
+    };
+  } catch (error) {
+    return {
+      resource: {
+        url: url.toString(),
+        status:
+          error instanceof SiteCheckError && error.code === "RESPONSE_TOO_LARGE"
+            ? "too_large"
+            : "error",
+      },
+    };
+  }
+}
+
+export async function analyzeSite(
+  input: string,
+  request: typeof safeRequest = safeRequest,
+): Promise<SiteCheckReport> {
   const startedAt = Date.now();
   const deadline = startedAt + SITE_CHECK_LIMITS.analysisTimeoutMs;
   const normalizedUrl = normalizeTargetUrl(input);
-  const response = await safeRequest(normalizedUrl, SITE_CHECK_LIMITS.htmlBytes, deadline);
+  const response = await request(normalizedUrl, SITE_CHECK_LIMITS.htmlBytes, deadline);
   const finalUrl = new URL(response.url);
   const origin = new URL(finalUrl.origin);
-  const [robots, sitemap] = await Promise.all([
+  const [robots, sitemap, llms, agentCard] = await Promise.all([
     inspectResource(
       new URL("/robots.txt", origin),
       SITE_CHECK_LIMITS.robotsBytes,
       deadline,
       "robots",
+      request,
     ),
     inspectResource(
       new URL("/sitemap.xml", origin),
       SITE_CHECK_LIMITS.sitemapBytes,
       deadline,
       "sitemap",
+      request,
+    ),
+    inspectOptionalResource(
+      new URL("/llms.txt", origin),
+      SITE_CHECK_LIMITS.llmsBytes,
+      deadline,
+      request,
+    ),
+    inspectOptionalResource(
+      new URL("/.well-known/agent-card.json", origin),
+      SITE_CHECK_LIMITS.agentCardBytes,
+      deadline,
+      request,
     ),
   ]);
+
+  const agentAnalysis = analyzeAgentReadiness(response, robots, llms, agentCard);
 
   const statusCheck: SiteCheckStatus = response.status >= 200 && response.status < 300
     ? "pass"
@@ -264,6 +330,7 @@ export async function analyzeSite(input: string): Promise<SiteCheckReport> {
     ...analyzeResponseHtml(response),
     robots.check,
     sitemap.check,
+    ...agentAnalysis.checks,
   ];
 
   const summary = checks.reduce<SiteCheckReport["summary"]>(
@@ -287,6 +354,7 @@ export async function analyzeSite(input: string): Promise<SiteCheckReport> {
       robots: robots.resource,
       sitemap: sitemap.resource,
     },
+    agents: agentAnalysis.agents,
     checks,
   };
 }

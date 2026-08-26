@@ -144,6 +144,9 @@ generation, link assembly, parsing and file conversion happen entirely in the
 browser. The public application requires no account and contains no third-party
 ads. SiteCheck sends only the submitted public URL to the application server
 for the duration of one analysis; it creates no history or public report link.
+Its AI and agent readiness section distinguishes search, user-initiated and
+training crawlers, checks initial HTML and JSON-LD, and passively detects
+optional `llms.txt`, OpenAPI, MCP, WebMCP and A2A signals without invoking them.
 
 ## Roadmap
 
@@ -152,7 +155,8 @@ for the duration of one analysis; it creates no history or public report link.
 3. UTM and WhatsApp link builder — available.
 4. JSON, YAML, and CSV toolkit — available.
 5. SiteCheck for HTTP, TLS, security headers, SEO and indexing — available.
-6. Later products such as Hook.
+6. Hook — planned.
+7. SiteCheck AI and agent readiness — in development.
 
 ## License
 

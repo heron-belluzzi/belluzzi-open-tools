@@ -17,12 +17,42 @@ const report = {
     robots: { url: "https://belluzzi.dev/robots.txt", status: "available", statusCode: 200 },
     sitemap: { url: "https://belluzzi.dev/sitemap.xml", status: "available", statusCode: 200 },
   },
+  agents: {
+    profile: "website",
+    policies: [
+      { provider: "OpenAI", crawler: "OAI-SearchBot", purpose: "search", decision: "allowed", source: "robots", evidence: "allow: /" },
+      { provider: "OpenAI", crawler: "ChatGPT-User", purpose: "user_action", decision: "allowed", source: "robots", evidence: "allow: /" },
+      { provider: "OpenAI", crawler: "GPTBot", purpose: "training", decision: "blocked", source: "robots", evidence: "disallow: /" },
+    ],
+    pageDirectives: { meta: [], headers: [], conflicts: [] },
+    initialHtml: { textLength: 840, appShellSuspected: false, semanticLandmarks: 4, discoverableLinks: 12 },
+    structuredData: { valid: 1, invalid: 0, types: ["WebSite"] },
+    llms: {
+      url: "https://belluzzi.dev/llms.txt",
+      status: "missing",
+      statusCode: 404,
+      experimental: true,
+      valid: false,
+      links: 0,
+      hasFullVersion: false,
+    },
+    agentCard: {
+      url: "https://belluzzi.dev/.well-known/agent-card.json",
+      status: "missing",
+      statusCode: 404,
+      valid: false,
+    },
+    signals: [],
+  },
   checks: [
     { id: "http_status", category: "http", status: "pass", value: "200" },
     { id: "tls_enabled", category: "tls", status: "pass", value: "TLSv1.3" },
     { id: "header_csp", category: "headers", status: "pass", value: "default-src 'self'" },
     { id: "seo_title", category: "seo", status: "pass", value: "Belluzzi" },
     { id: "indexing_robots", category: "indexing", status: "pass", value: "200" },
+    { id: "agents_crawl_search", category: "agents", status: "pass", value: "allowed: 1" },
+    { id: "agents_crawl_training", category: "agents", status: "info", value: "blocked: 1" },
+    { id: "agents_llms_txt", category: "agents", status: "info", value: "missing · HTTP 404" },
   ],
 };
 
@@ -65,6 +95,10 @@ test("renders an actionable bilingual report without sending the target to analy
   await expect(page.getByText("Resposta HTTP final")).toBeVisible();
   await expect(page.getByText("Content Security Policy")).toBeVisible();
   await expect(page.getByText("Arquivo robots.txt")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "IA e agentes" })).toBeVisible();
+  await expect(page.getByRole("table", { name: "Política por crawler" })).toBeVisible();
+  await expect(page.getByText("Bloqueado")).toBeVisible();
+  await expect(page.getByText("Recurso opcional; a ausência não penaliza o relatório.").first()).toBeVisible();
   await expect(page.getByText("https://belluzzi.dev/pt")).toBeVisible();
 
   await page.goto("/en/check");

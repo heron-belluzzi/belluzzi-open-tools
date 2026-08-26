@@ -15,6 +15,8 @@ export const SITE_CHECK_LIMITS = {
   htmlBytes: 1_048_576,
   robotsBytes: 262_144,
   sitemapBytes: 1_048_576,
+  llmsBytes: 262_144,
+  agentCardBytes: 262_144,
 } as const;
 
 type ResolvedAddress = {
@@ -255,9 +257,14 @@ export async function safeRequest(
   initialUrl: URL,
   maxBytes: number,
   deadline: number,
+  options: { allowedOrigin?: string } = {},
 ): Promise<SafeResponse> {
   let current = initialUrl;
   const redirects: SiteCheckRedirect[] = [];
+
+  if (options.allowedOrigin && current.origin !== options.allowedOrigin) {
+    throw new SiteCheckError("TARGET_BLOCKED");
+  }
 
   for (let index = 0; index <= SITE_CHECK_LIMITS.redirects; index += 1) {
     const response = await requestOnce(current, maxBytes, deadline);
@@ -276,6 +283,9 @@ export async function safeRequest(
       } catch (error) {
         if (error instanceof SiteCheckError) throw error;
         throw new SiteCheckError("TARGET_UNREACHABLE");
+      }
+      if (options.allowedOrigin && current.origin !== options.allowedOrigin) {
+        throw new SiteCheckError("TARGET_BLOCKED");
       }
       continue;
     }
