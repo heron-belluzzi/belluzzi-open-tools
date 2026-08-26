@@ -112,6 +112,9 @@ O plano detalhado está em
 
 ### SiteCheck — AI & Agent Readiness — sétima release
 
+O planejamento detalhado está em
+[`docs/SITECHECK-AGENT-READINESS.md`](SITECHECK-AGENT-READINESS.md).
+
 - [ ] Evoluir o SiteCheck com uma categoria `IA & Agentes`, sem criar um
   produto separado na primeira versão.
 - [ ] Verificar políticas de acesso para crawlers de busca, uso por usuários e
