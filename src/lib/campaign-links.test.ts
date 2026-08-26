@@ -11,7 +11,7 @@ import { parseQrHandoff, serializeQrHandoff } from "./tool-handoff";
 
 describe("normalizeCampaignValue", () => {
   it("creates lowercase snake_case values without accents", () => {
-    expect(normalizeCampaignValue(" Lançamento — Versão 2 ")).toBe(
+    expect(normalizeCampaignValue(" Lançamento: Versão 2 ")).toBe(
       "lancamento_versao_2",
     );
   });

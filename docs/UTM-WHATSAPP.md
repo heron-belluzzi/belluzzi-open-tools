@@ -1,4 +1,4 @@
-# UTM & WhatsApp Builder — Especificação funcional
+# UTM & WhatsApp Builder: Especificação funcional
 
 ## Objetivo
 

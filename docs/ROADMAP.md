@@ -1,4 +1,4 @@
-# Roadmap — Belluzzi Open Tools
+# Roadmap: Belluzzi Open Tools
 
 Este documento acompanha o estado real do repositório e da instância oficial.
 
@@ -14,7 +14,7 @@ Este documento acompanha o estado real do repositório e da instância oficial.
 - [x] UTMs consistentes nos links para `belluzzi.dev`.
 - [x] Headers de segurança e Content Security Policy.
 
-## QR Code Studio — primeira release
+## QR Code Studio: primeira release
 
 - [x] URL, texto, Wi-Fi, vCard, evento, WhatsApp e e-mail.
 - [x] Cores, tamanho, margem e níveis de correção de erro.
@@ -26,7 +26,7 @@ Este documento acompanha o estado real do repositório e da instância oficial.
 - [x] Incluir o atalho na seção unificada `Belluzzi Open Tools` em
   `belluzzi.dev`.
 
-## Pass — segunda release
+## Pass: segunda release
 
 - [x] Senhas aleatórias usando Web Crypto e amostragem sem viés.
 - [x] Regras de tamanho, letras, números, símbolos e caracteres ambíguos.
@@ -40,7 +40,7 @@ Este documento acompanha o estado real do repositório e da instância oficial.
 - [x] Incluir o atalho na seção unificada `Belluzzi Open Tools` em
   `belluzzi.dev`.
 
-## UTM & WhatsApp Builder — terceira release
+## UTM & WhatsApp Builder: terceira release
 
 - [x] UTMs com origem, mídia, campanha, conteúdo e termo.
 - [x] Presets para Google Ads, Meta Ads, Instagram e newsletter.
@@ -76,7 +76,7 @@ A especificação está em [`docs/UTM-WHATSAPP.md`](UTM-WHATSAPP.md).
 O plano detalhado está em
 [`docs/CREDIBILITY-PLAN.md`](CREDIBILITY-PLAN.md).
 
-## Data Toolkit — quarta release
+## Data Toolkit: quarta release
 
 - [x] Formatar, validar e minificar JSON.
 - [x] Converter JSON e YAML com parsing seguro.
@@ -87,7 +87,7 @@ O plano detalhado está em
 - [x] Publicar a release `v0.4.0` na instância oficial.
 - [x] Ativar `data.belluzzi.dev` somente depois da rota canônica estar pronta.
 
-## SiteCheck — quinta release
+## SiteCheck: quinta release
 
 - [x] Manter o produto no mesmo repositório, aplicação e processo PM2.
 - [x] Verificar HTTP, redirecionamentos, TLS, headers, SEO, robots e sitemap.
@@ -101,7 +101,7 @@ O plano detalhado está em
 
 ## Produtos posteriores
 
-### Hook — sexta release
+### Hook: sexta release
 
 - [ ] Criar inbox temporário e seguro para webhooks.
 - [ ] Gerar endpoints imprevisíveis para receber requisições HTTP.
@@ -110,7 +110,7 @@ O plano detalhado está em
 - [ ] Manter o produto sem cadastro na primeira versão e documentar privacidade.
 - [ ] Publicar com PT/EN, temas, mobile, teclado e testes proporcionais ao risco.
 
-### SiteCheck — AI & Agent Readiness — sétima release
+### SiteCheck: AI & Agent Readiness (sétima release)
 
 O planejamento detalhado está em
 [`docs/SITECHECK-AGENT-READINESS.md`](SITECHECK-AGENT-READINESS.md).
