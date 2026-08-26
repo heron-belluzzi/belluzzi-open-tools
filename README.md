@@ -147,11 +147,11 @@ for the duration of one analysis; it creates no history or public report link.
 
 ## Roadmap
 
-1. QR Code Studio — available.
-2. Password and passphrase generator — available.
-3. UTM and WhatsApp link builder — available.
-4. JSON, YAML, and CSV toolkit — available.
-5. SiteCheck for HTTP, TLS, security headers, SEO and indexing — available.
+1. QR Code Studio: available.
+2. Password and passphrase generator: available.
+3. UTM and WhatsApp link builder: available.
+4. JSON, YAML, and CSV toolkit: available.
+5. SiteCheck for HTTP, TLS, security headers, SEO and indexing: available.
 6. Later products such as Hook.
 
 ## License

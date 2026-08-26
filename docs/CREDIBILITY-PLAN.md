@@ -131,8 +131,8 @@ de logs. Não será um scanner invasivo de segurança.
 
 1. Implementar a seção Belluzzi Open Tools em `belluzzi.dev`.
 2. Melhorar a apresentação e os metadados do repositório no GitHub.
-3. Desenvolver e publicar o Data Toolkit como `v0.4.0` — concluído.
-4. Definir a arquitetura segura do SiteCheck — concluído.
+3. Desenvolver e publicar o Data Toolkit como `v0.4.0`: concluído.
+4. Definir a arquitetura segura do SiteCheck: concluído.
 5. Desenvolver e publicar o SiteCheck como `v0.5.0`.
 
 ## Definição de pronto da camada de credibilidade
