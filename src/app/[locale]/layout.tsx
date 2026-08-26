@@ -70,7 +70,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       card: "summary_large_image",
     },
     icons: {
-      icon: "/belluzzi-open-tools.svg",
+      icon: "/belluzzi-favicon-v2.svg",
     },
     robots: "index, follow",
     alternates: {
